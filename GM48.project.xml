@@ -11,6 +11,9 @@
       <sprite>sprites\HitboxFloorCheck_spr</sprite>
       <sprite>sprites\HitboxWallCheck_spr</sprite>
     </sprites>
+    <sprites name="Environment">
+      <sprite>sprites\SolidTest_spr</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -34,6 +37,7 @@
         <scripts name="General">
           <script>scripts\array.gml</script>
           <script>scripts\split.gml</script>
+          <script>scripts\limit_value_magnitude.gml</script>
         </scripts>
       </scripts>
       <scripts name="Param Validators">
@@ -67,20 +71,55 @@
       <scripts name="Utilities">
         <scripts name="InputManager">
           <scripts name="Public">
-            <script>scripts\InputManager_GetButtonState_scr.gml</script>
+            <script>scripts\InputManager_GetButtonControlState_scr.gml</script>
+            <script>scripts\InputManager_RegisterButtonControlKbd_scr.gml</script>
           </scripts>
           <scripts name="Private">
-            <script>scripts\CheckInputKeyboard_scr.gml</script>
+            <script>scripts\InputManager_CheckInputKeyboard_scr.gml</script>
             <script>scripts\InputManager_Init_scr.gml</script>
+            <script>scripts\InputManager_InitDefaultKbdControls_scr.gml</script>
             <script>scripts\InputManager_DefineEnums_scr.gml</script>
           </scripts>
         </scripts>
         <scripts name="HitBox">
           <scripts name="Public">
-            <script>scripts\Hitbox_Create_scr.gml</script>
+            <script>scripts\Hitbox_PlaceMeeting_scr.gml</script>
+            <script>scripts\Hitbox_InstancePlaceList_scr.gml</script>
+          </scripts>
+        </scripts>
+        <scripts name="Game Controller">
+          <scripts name="Private">
+            <script>scripts\GameController_InitGlobals_scr.gml</script>
           </scripts>
         </scripts>
       </scripts>
+      <scripts name="Entities">
+        <scripts name="Combatant">
+          <scripts name="States">
+            <script>scripts\Combatant_StateIdle_scr.gml</script>
+            <script>scripts\Combatant_StateGround_scr.gml</script>
+            <script>scripts\Combatant_StateAir_scr.gml</script>
+          </scripts>
+          <scripts name="Private">
+            <script>scripts\Combatant_CollisionSolidGround_scr.gml</script>
+            <script>scripts\Combatant_LimitGroundSpeed_scr.gml</script>
+            <script>scripts\Combatant_EnforceFriction_scr.gml</script>
+          </scripts>
+        </scripts>
+        <scripts name="PlayerBase">
+          <scripts name="Private">
+            <script>scripts\PlayerBase_Init_scr.gml</script>
+            <script>scripts\PlayerBase_GroundControlsMovement_scr.gml</script>
+          </scripts>
+          <scripts name="States">
+            <script>scripts\PlayerBase_StateGround_scr.gml</script>
+          </scripts>
+        </scripts>
+      </scripts>
+    </scripts>
+    <scripts name="General">
+      <script>scripts\object_is.gml</script>
+      <script>scripts\instance_place_list.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
@@ -90,8 +129,9 @@
     <objects name="Classes">
       <objects name="Utilities">
         <object>objects\Hitbox_obj</object>
+        <object>objects\InputManager_obj</object>
+        <object>objects\GameController_obj</object>
       </objects>
-      <object>objects\InputManager_obj</object>
       <objects name="Entities">
         <object>objects\Entity_obj</object>
         <object>objects\Combatant_obj</object>
@@ -102,6 +142,7 @@
         </objects>
         <objects name="Player">
           <object>objects\PlayerBase_obj</object>
+          <object>objects\Player1_obj</object>
         </objects>
       </objects>
       <objects name="Environment">
