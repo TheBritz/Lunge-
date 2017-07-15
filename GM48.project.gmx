@@ -7,8 +7,10 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\Player_spr</sprite>
+    <sprite>sprites\PlayerMaskFull_spr</sprite>
     <sprites name="Masks">
       <sprite>sprites\HitboxFloorCheck_spr</sprite>
+      <sprite>sprites\HitboxFloorCheckThin_spr</sprite>
       <sprite>sprites\HitboxWallCheck_spr</sprite>
     </sprites>
     <sprites name="Environment">
@@ -38,6 +40,7 @@
           <script>scripts\array.gml</script>
           <script>scripts\split.gml</script>
           <script>scripts\limit_value_magnitude.gml</script>
+          <script>scripts\move_outside_solid_with_mask.gml</script>
         </scripts>
       </scripts>
       <scripts name="Param Validators">
@@ -102,8 +105,10 @@
           </scripts>
           <scripts name="Private">
             <script>scripts\Combatant_CollisionSolidGround_scr.gml</script>
+            <script>scripts\Combatant_CollisionSolidAir_scr.gml</script>
             <script>scripts\Combatant_LimitGroundSpeed_scr.gml</script>
             <script>scripts\Combatant_EnforceFriction_scr.gml</script>
+            <script>scripts\handleCollisions.gml</script>
           </scripts>
         </scripts>
         <scripts name="PlayerBase">
@@ -113,6 +118,7 @@
           </scripts>
           <scripts name="States">
             <script>scripts\PlayerBase_StateGround_scr.gml</script>
+            <script>scripts\PlayerBase_StateTransitionWallLatch_scr.gml</script>
           </scripts>
         </scripts>
       </scripts>

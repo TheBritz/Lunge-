@@ -26,12 +26,12 @@ else
   m_movementGroundActivelyMoving = false;
 }
 
-if(jumpState == ButtonStates.Pressed)
+if(jumpState == ButtonStates.JustPressed)
 {
   //Jump and change to air state
-  if(!is_undefined(m_movementGoundJumpSpeed))
+  if(!is_undefined(m_movementGroundJumpSpeed))
   {
-    hspeed = -m_movementGroundJumpSpeed;
+    vspeed = -m_movementGroundJumpSpeed;
   }
 }
 

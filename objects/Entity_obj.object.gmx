@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///Entity Init
+m_facing = 1;
 
 </string>
           </argument>

@@ -57,7 +57,7 @@ m_combatantState = undefined;
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="3" enumb="2">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -102,6 +102,9 @@ switch(m_combatantState)
 {
   case CombatantStates.Ground:
     Combatant_StateGround_scr();
+    break;
+  case CombatantStates.Air:
+    Combatant_StateAir_scr();
     break;
 }
 </string>

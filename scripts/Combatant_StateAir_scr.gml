@@ -10,4 +10,4 @@ else
   vspeed += global.Gravity;
 }
 
-//Combatant_CollisionSolidAir_scr();
+Combatant_CollisionSolidAir_scr();

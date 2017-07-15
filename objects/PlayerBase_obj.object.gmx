@@ -27,6 +27,13 @@
             <kind>1</kind>
             <string>event_inherited();
 m_combatantState = CombatantStates.Ground;
+
+enum PlayerStates
+{
+  WallLatch,
+  WallSlide,
+  None
+}
 </string>
           </argument>
         </arguments>

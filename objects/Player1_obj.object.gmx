@@ -29,6 +29,7 @@
 event_inherited();
 m_movementGroundAccelHor = .2;
 m_movementGroundMaxSpeed = 2;
+m_movementGroundJumpSpeed = 10;
 </string>
           </argument>
         </arguments>
