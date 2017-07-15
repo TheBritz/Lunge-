@@ -5,7 +5,9 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
+  <sprites name="sprites">
+    <sprite>sprites\Player_spr</sprite>
+  </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -65,10 +67,7 @@
         <scripts name="Private">
           <script>scripts\CheckInputKeyboard_scr.gml</script>
           <script>scripts\InputManager_Init_scr.gml</script>
-<<<<<<< HEAD
           <script>scripts\InputManager_DefineEnums_scr.gml</script>
-=======
->>>>>>> 80d752c5629f25eb04face985375d6a25334fb0c
         </scripts>
       </scripts>
     </scripts>
@@ -78,12 +77,8 @@
   </fonts>
   <objects name="objects">
     <objects name="Classes">
-<<<<<<< HEAD
-	<object>objects\InputManager_obj</object>      
-	<objects name="Entities">
-=======
+      <object>objects\InputManager_obj</object>
       <objects name="Entities">
->>>>>>> 80d752c5629f25eb04face985375d6a25334fb0c
         <object>objects\Entity_obj</object>
         <object>objects\Combatant_obj</object>
         <object>objects\Friendly_obj</object>
@@ -96,7 +91,7 @@
         </objects>
       </objects>
       <objects name="Environment">
-        <object>objects\object9</object>
+        <object>objects\Solid_obj</object>
       </objects>
     </objects>
     <objects name="Debug">
