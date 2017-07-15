@@ -7,6 +7,10 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\Player_spr</sprite>
+    <sprites name="Masks">
+      <sprite>sprites\HitboxFloorCheck_spr</sprite>
+      <sprite>sprites\HitboxWallCheck_spr</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -60,14 +64,21 @@
       </scripts>
     </scripts>
     <scripts name="Classes">
-      <scripts name="InputManager">
-        <scripts name="Public">
-          <script>scripts\InputManager_GetButtonState_scr.gml</script>
+      <scripts name="Utilities">
+        <scripts name="InputManager">
+          <scripts name="Public">
+            <script>scripts\InputManager_GetButtonState_scr.gml</script>
+          </scripts>
+          <scripts name="Private">
+            <script>scripts\CheckInputKeyboard_scr.gml</script>
+            <script>scripts\InputManager_Init_scr.gml</script>
+            <script>scripts\InputManager_DefineEnums_scr.gml</script>
+          </scripts>
         </scripts>
-        <scripts name="Private">
-          <script>scripts\CheckInputKeyboard_scr.gml</script>
-          <script>scripts\InputManager_Init_scr.gml</script>
-          <script>scripts\InputManager_DefineEnums_scr.gml</script>
+        <scripts name="HitBox">
+          <scripts name="Public">
+            <script>scripts\Hitbox_Create_scr.gml</script>
+          </scripts>
         </scripts>
       </scripts>
     </scripts>
@@ -77,6 +88,9 @@
   </fonts>
   <objects name="objects">
     <objects name="Classes">
+      <objects name="Utilities">
+        <object>objects\Hitbox_obj</object>
+      </objects>
       <object>objects\InputManager_obj</object>
       <objects name="Entities">
         <object>objects\Entity_obj</object>

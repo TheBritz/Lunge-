@@ -7,7 +7,50 @@
   <persistent>0</persistent>
   <parentName>Entity_obj</parentName>
   <maskName>&lt;undefined&gt;</maskName>
-  <events/>
+  <events>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check for solids
+
+//Check for floor
+var spriteHeight = sprite_get_height(sprite_index);
+var spriteOrigY = sprite_get_yoffset(sprite_index);
+var hitboxY = y + spriteHeight - spriteOrigY;
+with(Hitbox_Create_scr(x, hitboxY, HitboxFloorCheck_spr))
+{
+  if(!place_meeting(x, y, Solid_obj))
+  {
+    //State changed to falling
+  }
+}
+
+//Check for Wall
+//Right
+var spriteWidth = sprite_get_width(sprite_index);
+var spriteOrigX = sprite_get_xoffset(sprite_index);
+var hitboxRightX = x + spriteWidth - spriteOrigX;
+with(Hitbox_Create_scr(hitboxRightX, y, HitboxFloorCheck_spr)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+  </events>
   <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>
