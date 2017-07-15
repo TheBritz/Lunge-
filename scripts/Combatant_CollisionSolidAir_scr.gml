@@ -1,7 +1,11 @@
+trace("Step " + string(global.StepNumber) + ": Combatant_CollisionSolidAir_scr");
+
 if(Hitbox_PlaceMeeting_scr(x, y, Solid_obj, PlayerMaskFull_spr))
 {
-  var dirPrevious = point_direction(x, y, xprevious, yprevious);
-  move_outside_solid_with_mask(dirPrevious, speed, PlayerMaskFull_spr);
+  //move_outside_solid_with_mask(dirPrevious, speed, PlayerMaskFull_spr);
+  var previousPosition = Entity_GetPreviousPosition_scr(id, 2);
+  var dirPrevious = point_direction(previousPosition[0], previousPosition[1], x, y);
+  move_until_solid_with_mask(previousPosition[0], previousPosition[1], dirPrevious, 1, PlayerMaskFull_spr);
   //Did we hit a Wall, Floor, or ceiling?
   //Floor check
   var spriteHeight = sprite_get_height(sprite_index);
@@ -32,20 +36,15 @@ if(Hitbox_PlaceMeeting_scr(x, y, Solid_obj, PlayerMaskFull_spr))
     //We are on the wall
     if(object_is(object_index, PlayerBase_obj))
     {
-      m_playerState = PlayerStates.WallLatch;
       //We are now facing left
-      m_facing = -1;
-      PlayerBase_StateTransitionWallLatch_scr();
+      PlayerBase_StateTransitionWallLatch_scr(-1);
     }
   }
   else if(Hitbox_PlaceMeeting_scr(hitboxLeftX, y, Solid_obj, HitboxWallCheck_spr))
   {
     if(object_is(object_index, PlayerBase_obj))
     {
-      m_playerState = PlayerStates.WallLatch;
-      //We are now facing right
-      m_facing = 1;
-      PlayerBase_StateTransitionWallLatch_scr();
+      PlayerBase_StateTransitionWallLatch_scr(1);
     }
   }
 }

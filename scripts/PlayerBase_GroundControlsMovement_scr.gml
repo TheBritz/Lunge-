@@ -1,4 +1,5 @@
 ///Read Controls
+trace("Step " + string(global.StepNumber) + ": PlayerBase_GroundControlsMovement_scr");
 
 //Basic Movement
 var leftState = InputManager_GetButtonControlState_scr(ButtonControls.Left);

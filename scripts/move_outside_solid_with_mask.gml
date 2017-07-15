@@ -7,3 +7,8 @@ var maskOld = mask_index;
 mask_index = mask;
 move_outside_solid(dir, speed);
 mask_index = maskOld;
+
+if(place_free(x, y))
+{
+  var test = "test";
+}

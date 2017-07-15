@@ -27,7 +27,49 @@
             <kind>1</kind>
             <string>///Entity Init
 m_facing = 1;
+m_xPreviousList = ds_list_create();
+m_yPreviousList = ds_list_create();
+m_maximumPreviousTracked = 5;
+for(var i = 0; i &lt; m_maximumPreviousTracked; i++)
+{
+  ds_list_add(m_xPreviousList, xstart);
+  ds_list_add(m_yPreviousList, ystart);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Add to previous lists
+ds_list_insert(m_xPreviousList, 0, x);
+ds_list_insert(m_yPreviousList, 0, y);
 
+if(ds_list_size(m_xPreviousList) &gt; m_maximumPreviousTracked)
+{
+  ds_list_delete(m_xPreviousList, m_maximumPreviousTracked);
+}
+
+if(ds_list_size(m_yPreviousList) &gt; m_maximumPreviousTracked)
+{
+  ds_list_delete(m_yPreviousList, m_maximumPreviousTracked);
+}
 </string>
           </argument>
         </arguments>

@@ -1,4 +1,5 @@
 ///Check for solids
+trace("Step " + string(global.StepNumber) + ": Combatant_CollisionSolidGround_scr");
 
 //Check for floor
 var spriteHeight = sprite_get_height(sprite_index);
@@ -19,7 +20,8 @@ var hitboxRightX = x + spriteWidth - spriteOrigX - maskWidth + 1;
 if(Hitbox_PlaceMeeting_scr(hitboxRightX, y, Solid_obj, HitboxWallCheck_spr))
 {
   //Right wall collision
-  move_outside_solid_with_mask(180, speed*2, PlayerMaskFull_spr);
+  move_until_solid_with_mask(xprevious, yprevious, 0, 1, PlayerMaskFull_spr);
+  //move_outside_solid_with_mask(180, speed*2, PlayerMaskFull_spr);
   hspeed = 0;
 }
 
@@ -28,6 +30,7 @@ var hitboxLeftX = x - spriteOrigX + maskWidth - 1;
 if(Hitbox_PlaceMeeting_scr(hitboxLeftX, y, Solid_obj, HitboxWallCheck_spr))
 {
   //Left wall collision
-  move_outside_solid_with_mask(0, speed*2, PlayerMaskFull_spr);
+  move_until_solid_with_mask(xprevious, yprevious, 180, 1, PlayerMaskFull_spr);
+  //move_outside_solid_with_mask(0, speed*2, PlayerMaskFull_spr);
   hspeed = 0;
 }
