@@ -8,6 +8,55 @@
   <parentName>Entity_obj</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Init
+event_inherited();
+
+enum CombatantStates
+{
+  Ground,
+  Air,
+  GroundAttack,
+  AirAttack,
+  Block
+}
+
+//Movement
+m_movementGroundMaxSpeed = undefined;
+m_movementGroundAccelHor = undefined;
+m_movementGroundFriction = undefined;
+m_movementGroundJumpSpeed = undefined;
+m_movementGroundActivelyMoving = undefined;
+
+//Air
+m_movementAirFlyMaxSpeed = undefined;
+m_movementAirFallMaxSpeed = undefined;
+m_movementAirGravity = undefined;
+m_movementAirAccelHor = undefined;
+m_movementAirMaxSpeedHor = undefined;
+
+m_combatantState = undefined;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -25,26 +74,36 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Check for solids
+            <string>///Ancestor Events
+event_inherited();
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///State Machine
 
-//Check for floor
-var spriteHeight = sprite_get_height(sprite_index);
-var spriteOrigY = sprite_get_yoffset(sprite_index);
-var hitboxY = y + spriteHeight - spriteOrigY;
-with(Hitbox_Create_scr(x, hitboxY, HitboxFloorCheck_spr))
+switch(m_combatantState)
 {
-  if(!place_meeting(x, y, Solid_obj))
-  {
-    //State changed to falling
-  }
+  case CombatantStates.Ground:
+    Combatant_StateGround_scr();
+    break;
 }
-
-//Check for Wall
-//Right
-var spriteWidth = sprite_get_width(sprite_index);
-var spriteOrigX = sprite_get_xoffset(sprite_index);
-var hitboxRightX = x + spriteWidth - spriteOrigX;
-with(Hitbox_Create_scr(hitboxRightX, y, HitboxFloorCheck_spr)
 </string>
           </argument>
         </arguments>

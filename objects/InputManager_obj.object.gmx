@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>InputManager_DefineEnums_scr();
 InputManager_Init_scr();
+InputManager_InitDefaultKbdControls_scr();
 </string>
           </argument>
         </arguments>
@@ -49,7 +50,9 @@ InputManager_Init_scr();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>///Read Keyboard Controls
+InputManager_CheckInputKeyboard_scr();
+</string>
           </argument>
         </arguments>
       </action>

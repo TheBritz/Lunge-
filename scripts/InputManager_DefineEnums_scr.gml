@@ -37,3 +37,14 @@ enum Axes
   AxisCX,
   AxisCY
 }
+
+enum ButtonControls
+{
+  Left,
+  Right,
+  Down,
+  Up,
+  Attack,
+  Jump,
+  Block
+}
