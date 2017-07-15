@@ -86,6 +86,9 @@
           <object>objects\PlayerBase_obj</object>
         </objects>
       </objects>
+      <objects name="Environment">
+        <object>objects\object9</object>
+      </objects>
     </objects>
     <objects name="Debug">
       <object>objects\console_obj</object>
