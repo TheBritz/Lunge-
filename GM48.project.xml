@@ -8,6 +8,7 @@
   <sprites name="sprites">
     <sprite>sprites\Player_spr</sprite>
     <sprite>sprites\PlayerMaskFull_spr</sprite>
+    <sprite>sprites\PlayerMaskFall_spr</sprite>
     <sprites name="Masks">
       <sprite>sprites\HitboxFloorCheck_spr</sprite>
       <sprite>sprites\HitboxFloorCheckThin_spr</sprite>
@@ -41,6 +42,8 @@
           <script>scripts\split.gml</script>
           <script>scripts\limit_value_magnitude.gml</script>
           <script>scripts\move_outside_solid_with_mask.gml</script>
+          <script>scripts\move_until_solid.gml</script>
+          <script>scripts\move_until_solid_with_mask.gml</script>
         </scripts>
       </scripts>
       <scripts name="Param Validators">
@@ -97,6 +100,11 @@
         </scripts>
       </scripts>
       <scripts name="Entities">
+        <scripts name="Entity">
+          <scripts name="Public">
+            <script>scripts\Entity_GetPreviousPosition_scr.gml</script>
+          </scripts>
+        </scripts>
         <scripts name="Combatant">
           <scripts name="States">
             <script>scripts\Combatant_StateIdle_scr.gml</script>
@@ -119,6 +127,8 @@
           <scripts name="States">
             <script>scripts\PlayerBase_StateGround_scr.gml</script>
             <script>scripts\PlayerBase_StateTransitionWallLatch_scr.gml</script>
+            <script>scripts\PlayerBase_StateWallLatch_scr.gml</script>
+            <script>scripts\PlayerBase_StateWallSlide_scr.gml</script>
           </scripts>
         </scripts>
       </scripts>
@@ -126,6 +136,7 @@
     <scripts name="General">
       <script>scripts\object_is.gml</script>
       <script>scripts\instance_place_list.gml</script>
+      <script>scripts\trace.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
