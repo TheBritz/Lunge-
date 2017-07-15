@@ -65,7 +65,10 @@
         <scripts name="Private">
           <script>scripts\CheckInputKeyboard_scr.gml</script>
           <script>scripts\InputManager_Init_scr.gml</script>
+<<<<<<< HEAD
           <script>scripts\InputManager_DefineEnums_scr.gml</script>
+=======
+>>>>>>> 80d752c5629f25eb04face985375d6a25334fb0c
         </scripts>
       </scripts>
     </scripts>
@@ -75,8 +78,12 @@
   </fonts>
   <objects name="objects">
     <objects name="Classes">
+<<<<<<< HEAD
 	<object>objects\InputManager_obj</object>      
 	<objects name="Entities">
+=======
+      <objects name="Entities">
+>>>>>>> 80d752c5629f25eb04face985375d6a25334fb0c
         <object>objects\Entity_obj</object>
         <object>objects\Combatant_obj</object>
         <object>objects\Friendly_obj</object>
