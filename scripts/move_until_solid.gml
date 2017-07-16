@@ -24,7 +24,7 @@ while(place_free(x, y))
     //We went as far as we should
     x = xStop;
     y = yStop;
-    return;
+    exit;
   }
 }
 

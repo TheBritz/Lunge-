@@ -40,7 +40,6 @@
       <sprite>sprites\CombatChamber_spr</sprite>
       <sprite>sprites\ElevatorCar_spr</sprite>
     </sprites>
-    <sprite>sprites\sprite20</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -169,6 +168,15 @@
             <script>scripts\PlayerBase_StateWallSlide_scr.gml</script>
           </scripts>
         </scripts>
+        <scripts name="Movable">
+          <scripts name="Private">
+            <script>scripts\Movable_ChangeHSpeed_scr.gml</script>
+            <script>scripts\Movable_ChangeVSpeed_scr.gml</script>
+            <script>scripts\Movable_Init_scr.gml</script>
+            <script>scripts\Movable_HandleMovement_scr.gml</script>
+            <script>scripts\Movable_TestControls_scr.gml</script>
+          </scripts>
+        </scripts>
       </scripts>
     </scripts>
     <scripts name="General">
@@ -201,6 +209,7 @@
           <object>objects\PlayerBase_obj</object>
           <object>objects\Player1_obj</object>
         </objects>
+        <object>objects\Movable_obj</object>
       </objects>
       <objects name="Environment">
         <object>objects\Solid_obj</object>
