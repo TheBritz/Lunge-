@@ -1,6 +1,6 @@
 trace("Step " + string(global.StepNumber) + ": Combatant_CollisionSolidAir_scr");
 
-if(Hitbox_PlaceMeeting_scr(x, y, Solid_obj, PlayerMaskFull_spr))
+if(Hitbox_PlaceMeeting_scr(x, y, Solid_obj, PlayerMaskFall_spr))
 {
   //move_outside_solid_with_mask(dirPrevious, speed, PlayerMaskFull_spr);
   var previousPosition = Entity_GetPreviousPosition_scr(id, 2);
@@ -25,26 +25,43 @@ if(Hitbox_PlaceMeeting_scr(x, y, Solid_obj, PlayerMaskFull_spr))
   {
     //We are on the floor
     m_combatantState = CombatantStates.Ground;
+    move_outside_solid(90, sprite_height);
     vspeed = 0;
   }
   else if(Hitbox_PlaceMeeting_scr(x, hitboxCeilY, Solid_obj, HitboxFloorCheckThin_spr))
   {
     vspeed = 0;
+    move_outside_solid(270, speed*2);
   }
   else if(Hitbox_PlaceMeeting_scr(hitboxRightX, y, Solid_obj, HitboxWallCheck_spr))
   {
     //We are on the wall
+    var wall = Hitbox_InstancePlace_scr(hitboxRightX, y, Solid_obj, HitboxWallCheck_spr);
     if(object_is(object_index, PlayerBase_obj))
     {
       //We are now facing left
-      PlayerBase_StateTransitionWallLatch_scr(-1);
+      if(hspeed >= m_playerWallLatchSpeedThresh)
+      {
+        PlayerBase_StateTransitionWallLatch_scr(-1);
+      }
+      else if(hspeed > 0)
+      {
+        PlayerBase_StateTransitionWallSlide_scr(-1);
+      }
     }
   }
   else if(Hitbox_PlaceMeeting_scr(hitboxLeftX, y, Solid_obj, HitboxWallCheck_spr))
   {
     if(object_is(object_index, PlayerBase_obj))
     {
-      PlayerBase_StateTransitionWallLatch_scr(1);
+      if(hspeed <= -m_playerWallLatchSpeedThresh)
+      {
+        PlayerBase_StateTransitionWallLatch_scr(1);
+      }
+      else if(hspeed < 0)
+      {
+        PlayerBase_StateTransitionWallSlide_scr(1);
+      }
     }
   }
 }

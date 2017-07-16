@@ -26,6 +26,13 @@
           <argument>
             <kind>1</kind>
             <string>///Console Init
+
+//There can only be one
+if(instance_number(object_index) &gt; 1)
+{
+  instance_destroy();
+}
+
 global.ReusableMetadataMap = ds_map_create();
 global.Console = id;
 

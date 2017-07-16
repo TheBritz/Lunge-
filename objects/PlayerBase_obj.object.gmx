@@ -26,7 +26,26 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited();
+
+//Unique Player States
+enum PlayerStates
+{
+  WallLatch,
+  WallSlide,
+  None
+}
+
+//Sprites
+//m_combatantSpriteRun = PlayerRun_spr
+//m_combatantSpriteJump = PlayerJump_spr
+m_combatantSpriteIdle = Player_spr;
+m_combatantSpriteFall = PlayerFall_spr;
+m_playerSpriteWallCling = PlayerWallCling_spr;
+m_combatantSpriteGroundAttack = PlayerGroundAttack_spr;
+
 m_combatantState = CombatantStates.Ground;
+m_movementGroundMaxSpeed = 6;
+m_movementAirFallMaxSpeedHor = 7.5;
 m_playerState = PlayerStates.None;
 m_analogStickUsed = false;
 
@@ -34,13 +53,16 @@ m_analogStickUsed = false;
 m_playerMovementWallLatchTime = .2*room_speed;
 m_playerMovementWallSlideGravity = .07;
 m_playerMovementWallSlideMaxSpeed = 5;
+m_playerWallLatchJumpSpeed = 10;
+m_playerWallSlideJumpSpeed = 8.5;
+m_playerWallJumpLateralSpeedRatio = .7;
+m_playerWallLatchSpeedThresh = 3;
 
-enum PlayerStates
-{
-  WallLatch,
-  WallSlide,
-  None
-}
+//Audio
+m_audioRun = Run_snd;
+//m_audioGroundAttack = array();
+
+
 </string>
           </argument>
         </arguments>
@@ -64,7 +86,10 @@ enum PlayerStates
           <argument>
             <kind>1</kind>
             <string>///Wall-latch to Wall-slide alarm
-m_playerState = PlayerStates.WallSlide;
+if(m_playerState == PlayerStates.WallLatch)
+{
+  m_playerState = PlayerStates.WallSlide;
+}
 </string>
           </argument>
         </arguments>
@@ -115,6 +140,9 @@ switch(m_combatantState)
 {
   case CombatantStates.Ground:
     PlayerBase_StateGround_scr();
+    break;
+  case CombatantStates.Air:
+    PlayerBase_AirControlsMovement_scr();
     break;
 }
 

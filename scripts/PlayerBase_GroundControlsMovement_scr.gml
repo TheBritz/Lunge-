@@ -10,11 +10,13 @@ var accelHor = 0;
 if(leftState == ButtonStates.Pressed || leftState == ButtonStates.JustPressed)
 {
   accelHor -= m_movementGroundAccelHor;
+  m_facing = -1;
 }
 
 if(rightState == ButtonStates.Pressed || rightState == ButtonStates.JustPressed)
 {
   accelHor += m_movementGroundAccelHor;
+  m_facing = 1;
 }
 
 if(accelHor != 0)
@@ -32,7 +34,16 @@ if(jumpState == ButtonStates.JustPressed)
   //Jump and change to air state
   if(!is_undefined(m_movementGroundJumpSpeed))
   {
-    vspeed = -m_movementGroundJumpSpeed;
+    PlayerBase_Jump_scr();
   }
+}
+
+//Attack
+if(InputManager_GetButtonControlState_scr(ButtonControls.Attack) == ButtonStates.JustPressed)
+{
+  m_combatantState = CombatantStates.GroundAttack;
+  sprite_index = m_combatantSpriteGroundAttack;
+  m_movementGroundActivelyMoving = false;
+  alarm[1] = 12;
 }
 

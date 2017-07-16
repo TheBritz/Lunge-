@@ -38,6 +38,13 @@ enum CombatantStates
   None
 }
 
+//Sprites
+m_combatantSpriteIdle = undefined;
+m_combatantSpriteRun = undefined;
+m_combatantSpriteJump = undefined;
+m_combatantSpriteFall = undefined;
+m_combatantSpriteGroundAttack = undefined;
+
 //Movement
 m_movementGroundMaxSpeed = undefined;
 m_movementGroundAccelHor = undefined;
@@ -47,12 +54,137 @@ m_movementGroundActivelyMoving = undefined;
 
 //Air
 m_movementAirFlyMaxSpeed = undefined;
-m_movementAirFallMaxSpeed = undefined;
+m_movementAirFallMaxSpeedVert = undefined;
+m_movementAirFallMaxSpeedHor = undefined;
+m_movementAirFallAccelHor = undefined;
 m_movementAirGravity = undefined;
 m_movementAirAccelHor = undefined;
 m_movementAirMaxSpeedHor = undefined;
 
 m_combatantState = undefined;
+
+//Audio
+enum AudioEmitterTypes
+{
+  Movement,
+  Attack,
+  Damage
+}
+
+Combatant_AudioCreateEmitters_scr();
+//Movement Sounds
+m_audioRun = undefined;
+m_audioRunInstance = noone;
+m_audioJump = undefined;
+m_audioJumpInstance = undefined;
+
+//Attack Sounds
+m_audioGroundAttack = undefined;
+m_audioGroundAttackInstance = undefined;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Free audio emitters
+for(var i = 0; i &lt; ds_list_size(m_audioEmitterList); i++)
+{
+  var emitter = m_audioEmitterList[| i];
+  audio_emitter_free(emitter);
+}
+
+ds_list_destroy(m_audioEmitterList);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Attack Timer
+m_combatantState = CombatantStates.Ground;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Ancestor Events
+event_inherited();
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Position Audio Emitters
+for(var i = 0; i &lt; ds_list_size(m_audioEmitterList); i++)
+{
+  var emitter = m_audioEmitterList[| i];
+  audio_emitter_position(emitter, x, y, 0);
+}
 </string>
           </argument>
         </arguments>
@@ -103,6 +235,9 @@ switch(m_combatantState)
 {
   case CombatantStates.Ground:
     Combatant_StateGround_scr();
+    break;
+  case CombatantStates.GroundAttack:
+    Combatant_StateGroundAttack_scr();
     break;
   case CombatantStates.Air:
     Combatant_StateAir_scr();

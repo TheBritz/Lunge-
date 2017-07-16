@@ -30,8 +30,16 @@ else
   ds_list_clear(list);
 }
 
+if(debug_mode)
+{
+  var hitRep = instance_create(x1, y1, HitboxRepresentation_obj);
+  hitRep.sprite_index = maskInd;
+}
+
 with(Hitbox_obj)
 {
   mask_index = maskInd; 
   return instance_place_list(x1, y1, obj, checkSolid, list);
 }
+
+

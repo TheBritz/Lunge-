@@ -27,8 +27,10 @@
             <kind>1</kind>
             <string>///Init
 event_inherited();
-m_movementGroundAccelHor = .2;
-m_movementGroundMaxSpeed = 2;
+m_movementGroundAccelHor = .7;
+m_movementAirFallAccelHor = .5;
+m_movementGroundFriction = .5;
+m_movementGroundMaxSpeed = 6;
 m_movementGroundJumpSpeed = 10;
 </string>
           </argument>
