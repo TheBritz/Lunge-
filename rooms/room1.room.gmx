@@ -89,7 +89,7 @@
     <instance objName="Hitbox_obj" x="-144" y="-96" name="inst_9CDF4969" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Hitbox_obj" x="240" y="-48" name="inst_6E8AFC6F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Hitbox_obj" x="576" y="-144" name="inst_E9085ED7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="&lt;undefined&gt;" x="480" y="960" name="inst_D955392F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="Movable_obj" x="480" y="960" name="inst_CAC53A61" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
