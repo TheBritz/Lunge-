@@ -5,7 +5,7 @@ if(m_movementGroundActivelyMoving)
   {
     if(!audio_is_playing(m_audioRunInstance))
     {
-      Combatant_PlaySoundOn_scr(id, m_audioRun, AudioEmitterTypes.Movement, true, 1);
+      m_audioRunInstance = Combatant_PlaySoundOn_scr(id, m_audioRun, AudioEmitterTypes.Movement, true, 1);
     }
   }
 }

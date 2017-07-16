@@ -4,18 +4,41 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\Descend_snd</sound>
+    <sounds name="Player">
+      <sound>sound\Run_snd</sound>
+      <sound>sound\PlayerJump_snd</sound>
+    </sounds>
+  </sounds>
   <sprites name="sprites">
-    <sprite>sprites\Player_spr</sprite>
-    <sprite>sprites\PlayerMaskFull_spr</sprite>
-    <sprite>sprites\PlayerMaskFall_spr</sprite>
+    <sprites name="Player">
+      <sprite>sprites\Player_spr</sprite>
+      <sprite>sprites\PlayerWallCling_spr</sprite>
+      <sprite>sprites\PlayerFall_spr</sprite>
+      <sprite>sprites\PlayerGroundAttack_spr</sprite>
+      <sprite>sprites\PlayerMaskFull_spr</sprite>
+      <sprite>sprites\PlayerMaskFall_spr</sprite>
+    </sprites>
+    <sprites name="Enemies">
+      <sprite>sprites\EnemySlime_spr</sprite>
+      <sprite>sprites\EnemyCharger_spr</sprite>
+    </sprites>
     <sprites name="Masks">
       <sprite>sprites\HitboxFloorCheck_spr</sprite>
       <sprite>sprites\HitboxFloorCheckThin_spr</sprite>
       <sprite>sprites\HitboxWallCheck_spr</sprite>
+      <sprite>sprites\HitboxWallCheckSmall_spr</sprite>
+      <sprite>sprites\HitboxFloorCheckNarrow_spr</sprite>
+      <sprite>sprites\HitboxPlayerSlash_spr</sprite>
     </sprites>
     <sprites name="Environment">
       <sprite>sprites\SolidTest_spr</sprite>
+      <sprite>sprites\Blocks_spr</sprite>
+      <sprite>sprites\ElevatorShaft_spr</sprite>
+      <sprite>sprites\BloodLettingChamber_spr</sprite>
+      <sprite>sprites\CombatChamber_spr</sprite>
+      <sprite>sprites\ElevatorCar_spr</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background"/>
@@ -71,6 +94,7 @@
         <script>scripts\ConsoleMetadataSpawnObject_scr.gml</script>
         <script>scripts\ConsoleDeleteObjectInstancesOfType_scr.gml</script>
         <script>scripts\ConsoleMetadataDeleteObjectInstancesOfType_scr.gml</script>
+        <script>scripts\ConsoleRestartRoom_scr.gml</script>
       </scripts>
     </scripts>
     <scripts name="Classes">
@@ -91,6 +115,7 @@
           <scripts name="Public">
             <script>scripts\Hitbox_PlaceMeeting_scr.gml</script>
             <script>scripts\Hitbox_InstancePlaceList_scr.gml</script>
+            <script>scripts\Hitbox_InstancePlace_scr.gml</script>
           </scripts>
         </scripts>
         <scripts name="Game Controller">
@@ -109,24 +134,36 @@
           <scripts name="States">
             <script>scripts\Combatant_StateIdle_scr.gml</script>
             <script>scripts\Combatant_StateGround_scr.gml</script>
+            <script>scripts\Combatant_StateGroundAttack_scr.gml</script>
             <script>scripts\Combatant_StateAir_scr.gml</script>
           </scripts>
           <scripts name="Private">
             <script>scripts\Combatant_CollisionSolidGround_scr.gml</script>
             <script>scripts\Combatant_CollisionSolidAir_scr.gml</script>
             <script>scripts\Combatant_LimitGroundSpeed_scr.gml</script>
+            <script>scripts\Combatant_LimitAirSpeed_scr.gml</script>
             <script>scripts\Combatant_EnforceFriction_scr.gml</script>
             <script>scripts\handleCollisions.gml</script>
+            <script>scripts\Combatant_SetSpritesGround_scr.gml</script>
+            <script>scripts\Combatant_ControlAudioGround_scr.gml</script>
+            <script>scripts\Combatant_AudioCreateEmitters_scr.gml</script>
+            <script>scripts\Combatant_CreateAudioEmitter_scr.gml</script>
+          </scripts>
+          <scripts name="Public">
+            <script>scripts\Combatant_PlaySoundOn_scr.gml</script>
           </scripts>
         </scripts>
         <scripts name="PlayerBase">
           <scripts name="Private">
             <script>scripts\PlayerBase_Init_scr.gml</script>
             <script>scripts\PlayerBase_GroundControlsMovement_scr.gml</script>
+            <script>scripts\PlayerBase_AirControlsMovement_scr.gml</script>
+            <script>scripts\PlayerBase_Jump_scr.gml</script>
           </scripts>
           <scripts name="States">
             <script>scripts\PlayerBase_StateGround_scr.gml</script>
             <script>scripts\PlayerBase_StateTransitionWallLatch_scr.gml</script>
+            <script>scripts\PlayerBase_StateTransitionWallSlide_scr.gml</script>
             <script>scripts\PlayerBase_StateWallLatch_scr.gml</script>
             <script>scripts\PlayerBase_StateWallSlide_scr.gml</script>
           </scripts>
@@ -137,6 +174,7 @@
       <script>scripts\object_is.gml</script>
       <script>scripts\instance_place_list.gml</script>
       <script>scripts\trace.gml</script>
+      <script>scripts\move_outside.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
@@ -148,6 +186,7 @@
         <object>objects\Hitbox_obj</object>
         <object>objects\InputManager_obj</object>
         <object>objects\GameController_obj</object>
+        <object>objects\Camera_obj</object>
       </objects>
       <objects name="Entities">
         <object>objects\Entity_obj</object>
@@ -164,13 +203,19 @@
       </objects>
       <objects name="Environment">
         <object>objects\Solid_obj</object>
+        <object>objects\ElevatorShaft_obj</object>
+        <object>objects\BloodLettingChamber_obj</object>
+        <object>objects\CombatChamber_obj</object>
+        <object>objects\ElevatorCar_obj</object>
       </objects>
     </objects>
     <objects name="Debug">
       <object>objects\console_obj</object>
+      <object>objects\HitboxRepresentation_obj</object>
     </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\room1</room>
     <room>rooms\room0</room>
   </rooms>
   <help>

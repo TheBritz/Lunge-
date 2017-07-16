@@ -14,7 +14,7 @@ repeat(maxDist)
   }
   else
   {
-    repeat(maxDist)
+    /*repeat(maxDist)
     {
       x += lengthdir_x(granularity, dir + 180);
       y += lengthdir_y(granularity, dir + 180);
@@ -24,6 +24,6 @@ repeat(maxDist)
         y += lengthdir_y(granularity, dir);
         exit; 
       }
-    }
+    }*/
   }
 }

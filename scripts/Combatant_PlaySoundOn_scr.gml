@@ -1,4 +1,4 @@
-///Combatant_PlaySoundOn_scr(combatant, soundID, emitterType, isLooping, index [optional])
+///Combatant_PlaySoundOn_scr(combatant, soundID, emitterType, isLooping, priority, index [optional])
 var combatant = argument[0];
 var sndID = argument[1];
 var emitterType = argument[2];
@@ -32,6 +32,6 @@ with(combatant)
   var emitter = m_audioEmitterMap[? emitterType];
   if(!is_undefined(emitter))
   {
-    audio_play_sound_on(emitter, sndID, isLooping, priority);
+    return audio_play_sound_on(emitter, sndID, isLooping, priority);
   }
 }

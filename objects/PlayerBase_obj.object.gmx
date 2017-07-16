@@ -60,6 +60,7 @@ m_playerWallLatchSpeedThresh = 3;
 
 //Audio
 m_audioRun = Run_snd;
+m_audioJump = PlayerJump_snd;
 //m_audioGroundAttack = array();
 
 
