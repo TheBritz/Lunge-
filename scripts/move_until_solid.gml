@@ -1,9 +1,14 @@
-///move_until_solid(xStart, yStart, direction, increment)
+///move_until_solid(xStart, yStart, xEnd, yEnd, increment)
 
 var X = argument0;
 var Y = argument1;
-var dir = argument2;
-var increment = argument3;
+var xStop = argument2;
+var yStop = argument3;
+var increment = argument4;
+
+//Initial distance check
+var dir = point_direction(X, Y, xStop, yStop);
+var distInit = point_distance(X, Y, xStop, yStop);
 
 var xInc, yInc;
 xInc = lengthdir_x(increment, dir);
@@ -13,6 +18,14 @@ while(place_free(x, y))
 {
   x += xInc;
   y += yInc;
+  var dist = point_distance(X, Y, x, y);
+  if(dist >= distInit)
+  {
+    //We went as far as we should
+    x = xStop;
+    y = yStop;
+    return;
+  }
 }
 
 x -= xInc;

@@ -5,7 +5,7 @@ if(Hitbox_PlaceMeeting_scr(x, y, Solid_obj, PlayerMaskFall_spr))
   //move_outside_solid_with_mask(dirPrevious, speed, PlayerMaskFull_spr);
   var previousPosition = Entity_GetPreviousPosition_scr(id, 2);
   var dirPrevious = point_direction(previousPosition[0], previousPosition[1], x, y);
-  move_until_solid_with_mask(previousPosition[0], previousPosition[1], dirPrevious, 1, PlayerMaskFull_spr);
+  move_until_solid_with_mask(previousPosition[0], previousPosition[1], x, y, 1, PlayerMaskFull_spr);
   //Did we hit a Wall, Floor, or ceiling?
   //Floor check
   var spriteHeight = sprite_get_height(sprite_index);

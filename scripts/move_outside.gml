@@ -2,7 +2,7 @@
 
 var objectInstance = argument0;
 var dir = argument1;
-var maxDist = argument2;
+var maxDist = abs(argument2);
 var granularity = .1;
 
 repeat(maxDist)
