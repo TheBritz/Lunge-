@@ -1,10 +1,10 @@
-vspeed = 0;
-hspeed = 0;
+m_velocityV = 0;
+m_velocityH = 0;
 
 if(InputManager_GetButtonControlState_scr(ButtonControls.Jump) == ButtonStates.JustPressed)
 {
-  vspeed = -m_playerWallLatchJumpSpeed;
-  hspeed = m_playerWallLatchJumpSpeed*m_playerWallJumpLateralSpeedRatio*m_facing;
+  Movable_ChangeVSpeed_scr(-m_playerWallLatchJumpSpeed);
+  Movable_ChangeHSpeed_scr(m_playerWallLatchJumpSpeed*m_playerWallJumpLateralSpeedRatio*m_facing);
   m_playerState = PlayerStates.None;
   m_combatantState = CombatantStates.Air;
 }

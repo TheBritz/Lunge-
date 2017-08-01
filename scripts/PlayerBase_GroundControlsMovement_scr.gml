@@ -1,5 +1,5 @@
 ///Read Controls
-trace("Step " + string(global.StepNumber) + ": PlayerBase_GroundControlsMovement_scr");
+//trace("Step " + string(global.StepNumber) + ": PlayerBase_GroundControlsMovement_scr");
 
 //Basic Movement
 var leftState = InputManager_GetButtonControlState_scr(ButtonControls.Left);
@@ -21,7 +21,7 @@ if(rightState == ButtonStates.Pressed || rightState == ButtonStates.JustPressed)
 
 if(accelHor != 0)
 {
-  hspeed += accelHor;
+  Movable_ChangeHSpeed_scr(m_movementGroundMaxSpeed * m_facing, m_movementGroundAccelHor);
   m_movementGroundActivelyMoving = true;
 }
 else
@@ -43,7 +43,8 @@ if(InputManager_GetButtonControlState_scr(ButtonControls.Attack) == ButtonStates
 {
   m_combatantState = CombatantStates.GroundAttack;
   sprite_index = m_combatantSpriteGroundAttack;
+  image_index = 0;
   m_movementGroundActivelyMoving = false;
-  alarm[1] = 12;
+  alarm[1] = sprite_get_number(m_combatantSpriteGroundAttack)/image_speed;
 }
 

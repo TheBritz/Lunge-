@@ -1,9 +1,18 @@
 ///Movable_ChangeVSpeed_scr(targetSpeed, acceleration)
 
-var targetSpeed = argument0;
-var acceleration = argument1;
+var targetSpeed = argument[0];
+var acceleration = undefined;
+if(argument_count > 1) 
+  var acceleration = argument[1];
 
-if (m_velocityV < targetSpeed)
-    m_velocityV = min(m_velocityV + acceleration, targetSpeed); 
+if(!is_undefined(acceleration))
+{
+  if (m_velocityV < targetSpeed)
+      m_velocityV = min(m_velocityV + acceleration, targetSpeed); 
+  else
+      m_velocityV = max(m_velocityV - acceleration, targetSpeed);
+}
 else
-    m_velocityV = max(m_velocityV - acceleration, targetSpeed);   
+{
+  m_velocityV = targetSpeed;
+}

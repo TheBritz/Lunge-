@@ -10,10 +10,5 @@ if(!m_movementGroundActivelyMoving)
     frict = global.Friction;
   }
   
-  hspeed -= sign(hspeed) * frict;
-  var spdAbs = abs(hspeed);
-  if(spdAbs <= frict)
-  {
-    hspeed = 0;
-  }
+  Movable_ChangeHSpeed_scr(0, frict);
 }

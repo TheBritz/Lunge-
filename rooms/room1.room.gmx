@@ -9,7 +9,7 @@
   <speed>60</speed>
   <persistent>0</persistent>
   <colour>12632256</colour>
-  <showcolour>-1</showcolour>
+  <showcolour>0</showcolour>
   <code></code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
@@ -72,7 +72,6 @@
     <instance objName="Solid_obj" x="48" y="672" name="inst_11C70998" locked="0" code="" scaleX="19" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Solid_obj" x="48" y="720" name="inst_69A3C4FB" locked="0" code="" scaleX="1" scaleY="9" colour="4294967295" rotation="0"/>
     <instance objName="ElevatorCar_obj" x="3793" y="1178" name="inst_27386C1B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="CombatChamber_obj" x="960" y="96" name="inst_A02C7138" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Solid_obj" x="960" y="720" name="inst_A8BDD40C" locked="0" code="" scaleX="2" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Solid_obj" x="1056" y="768" name="inst_680FA5A0" locked="0" code="" scaleX="2" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Solid_obj" x="1152" y="816" name="inst_2BF9F3E8" locked="0" code="" scaleX="1" scaleY="2" colour="4294967295" rotation="0"/>
@@ -86,10 +85,16 @@
     <instance objName="Solid_obj" x="1536" y="1056" name="inst_DE7644B8" locked="0" code="" scaleX="7" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Solid_obj" x="1680" y="768" name="inst_147F034B" locked="0" code="" scaleX="1" scaleY="4" colour="4294967295" rotation="0"/>
     <instance objName="Solid_obj" x="1248" y="672" name="inst_0EC913D1" locked="0" code="" scaleX="3" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="Hitbox_obj" x="-144" y="-96" name="inst_9CDF4969" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="Hitbox_obj" x="240" y="-48" name="inst_6E8AFC6F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="Hitbox_obj" x="576" y="-144" name="inst_E9085ED7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="Movable_obj" x="480" y="960" name="inst_CAC53A61" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="CombatChamber_obj" x="960" y="96" name="inst_B644F475" locked="-1" code="" scaleX="13" scaleY="7" colour="2533359615" rotation="0"/>
+    <instance objName="Solid_obj" x="2112" y="336" name="inst_633205FC" locked="0" code="" scaleX="1" scaleY="13" colour="4294967295" rotation="0"/>
+    <instance objName="Solid_obj" x="2304" y="336" name="inst_91CA488E" locked="0" code="" scaleX="1" scaleY="18" colour="4294967295" rotation="0"/>
+    <instance objName="Solid_obj" x="2352" y="336" name="inst_6AAACAF1" locked="0" code="" scaleX="7" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="Solid_obj" x="960" y="336" name="inst_7B19AFD8" locked="0" code="" scaleX="24" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="Solid_obj" x="912" y="48" name="inst_50CF6FCC" locked="0" code="" scaleX="1" scaleY="13" colour="4294967295" rotation="0"/>
+    <instance objName="Solid_obj" x="960" y="48" name="inst_4A506A39" locked="0" code="" scaleX="52" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="Solid_obj" x="3456" y="48" name="inst_A4394BCA" locked="0" code="" scaleX="1" scaleY="20" colour="4294967295" rotation="0"/>
+    <instance objName="Solid_obj" x="2640" y="384" name="inst_AA115458" locked="0" code="" scaleX="1" scaleY="3" colour="4294967295" rotation="0"/>
+    <instance objName="Solid_obj" x="2640" y="528" name="inst_2F815D39" locked="0" code="" scaleX="17" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

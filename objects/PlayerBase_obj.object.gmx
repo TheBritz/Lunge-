@@ -40,8 +40,9 @@ enum PlayerStates
 //m_combatantSpriteJump = PlayerJump_spr
 m_combatantSpriteIdle = Player_spr;
 m_combatantSpriteFall = PlayerFall_spr;
+m_combatantSpriteRun = PlayerRun_spr;
 m_playerSpriteWallCling = PlayerWallCling_spr;
-m_combatantSpriteGroundAttack = PlayerGroundAttack_spr;
+m_combatantSpriteGroundAttack = PlayerAttackGroundDash_spr;
 
 m_combatantState = CombatantStates.Ground;
 m_movementGroundMaxSpeed = 6;
@@ -56,12 +57,19 @@ m_playerMovementWallSlideMaxSpeed = 5;
 m_playerWallLatchJumpSpeed = 10;
 m_playerWallSlideJumpSpeed = 8.5;
 m_playerWallJumpLateralSpeedRatio = .7;
-m_playerWallLatchSpeedThresh = 3;
+m_playerWallLatchSpeedThresh = 4;
+m_playerWallSlideSpeedThresh = 1.5;
 
 //Audio
-m_audioRun = Run_snd;
+//m_audioRun = Run_snd;
 m_audioJump = PlayerJump_snd;
 //m_audioGroundAttack = array();
+//Regiser run step sounds with specific frames of the run animation
+Entity_RegisterAnimationEvent_scr(id, PlayerRun_spr, 
+  1, PlayerBase_PlayRunStepSound_scr, id);
+Entity_RegisterAnimationEvent_scr(id, PlayerRun_spr, 
+  5, PlayerBase_PlayRunStepSound_scr, id);  
+
 
 
 </string>
@@ -113,28 +121,6 @@ if(m_playerState == PlayerStates.WallLatch)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Ancestor Events
-event_inherited();
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///State Machine
 
 switch(m_combatantState)
@@ -156,6 +142,28 @@ switch(m_playerState)
     PlayerBase_StateWallSlide_scr();
     break;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Ancestor Events
+event_inherited();
 </string>
           </argument>
         </arguments>

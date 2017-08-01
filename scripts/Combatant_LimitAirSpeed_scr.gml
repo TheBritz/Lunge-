@@ -1,5 +1,5 @@
 ///Combatant_LimitGroundSpeed_scr()
-
+/*
 if(!is_undefined(m_movementAirFallMaxSpeedHor))
 {
   hspeed = limit_value_magnitude(hspeed, m_movementAirFallMaxSpeedHor);

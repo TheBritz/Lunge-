@@ -1,5 +1,5 @@
 ///Read Controls
-trace("Step " + string(global.StepNumber) + ": PlayerBase_AirControlsMovement_scr");
+//trace("Step " + string(global.StepNumber) + ": PlayerBase_AirControlsMovement_scr");
 
 //Basic Movement
 var leftState = InputManager_GetButtonControlState_scr(ButtonControls.Left);
@@ -19,12 +19,7 @@ if(rightState == ButtonStates.Pressed || rightState == ButtonStates.JustPressed)
 
 if(accelHor != 0)
 {
-  hspeed += accelHor;
-  m_movementGroundActivelyMoving = true;
-}
-else
-{
-  m_movementGroundActivelyMoving = false;
+  Movable_ChangeHSpeed_scr(m_movementAirFallMaxSpeedHor * sign(accelHor), m_movementAirFallAccelHor);
 }
 
 if(jumpState == ButtonStates.JustPressed)
