@@ -17,8 +17,8 @@
   <sprites name="sprites">
     <sprites name="Player">
       <sprite>sprites\Player_spr</sprite>
+      <sprite>sprites\PlayerRunNew_spr</sprite>
       <sprite>sprites\PlayerRun_spr</sprite>
-      <sprite>sprites\PlayerRunOld_spr</sprite>
       <sprite>sprites\PlayerWallCling_spr</sprite>
       <sprite>sprites\PlayerFall_spr</sprite>
       <sprite>sprites\PlayerAttackGroundDash_spr</sprite>
