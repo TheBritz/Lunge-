@@ -30,6 +30,10 @@
     <sprites name="Enemies">
       <sprite>sprites\EnemySlime_spr</sprite>
       <sprite>sprites\EnemyCharger_spr</sprite>
+      <sprites name="Hollow">
+        <sprite>sprites\EnemyHollowGroundAttack_spr</sprite>
+        <sprite>sprites\EnemyHollowGroundIdle_spr</sprite>
+      </sprites>
     </sprites>
     <sprites name="Masks">
       <sprite>sprites\HitboxFloorCheck_spr</sprite>

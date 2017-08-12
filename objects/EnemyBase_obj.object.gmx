@@ -7,7 +7,118 @@
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
-  <events/>
+  <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Enemy Base Init
+event_inherited();
+
+//The antagonist type is the object type that will be perceived as the enemy
+m_aiAntagonistType = Friendly_obj;
+m_aiTarget = noone;
+
+//Seed the antagonist scan alarm
+m_aiFriendlyScanRate = round(room_speed/4);
+alarm[11] = irandom(m_friendlyScanRate) + 1;
+
+//The distance at which an enemy can see an antagonist
+m_aiSightMaxDist = 1200;
+
+m_aiSightCone = array(70, -70);
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Look for a friendly combatant to attack
+
+//Loop through each instance of the Antagonist Type
+with(m_antagonistType)
+{
+  //Check if the friendly is close enough to see
+  var dist = distance_to_object(other.id);
+  if(dist &lt; m_aiSightMaxDist)
+  {  
+    //Friendly is close enough, now check if the view to the friendly is 
+    //unobstructed
+    var hit = collision_line(other.x, other.y, x, y, Solid_obj, false, false);
+    if(!instance_exists(hit))
+    {
+      //Friendly in sight
+      other.m_aiTarget = id; 
+    } 
+  }  
+}
+
+alarm[11] = m_aiFriendlyScanRate;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Engage Friendly
+if(instance_exists(m_aiTarget))
+{
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+  </events>
   <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>
