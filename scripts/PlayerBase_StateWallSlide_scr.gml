@@ -6,6 +6,7 @@ if(InputManager_GetButtonControlState_scr(ButtonControls.Jump) == ButtonStates.J
   Movable_ChangeHSpeed_scr(m_playerWallSlideJumpSpeed*m_playerWallJumpLateralSpeedRatio*m_facing);;
   m_playerState = PlayerStates.None;
   m_combatantState = CombatantStates.Air;
+  m_movementSuppressGravity = false;
 }
 else
 {  
@@ -13,6 +14,7 @@ else
   {
     //State changed to Ground
     m_combatantState = CombatantStates.Ground;
+    m_movementSuppressGravity = false;
     m_playerState = PlayerStates.None;
     Movable_ChangeVSpeed_scr(0);
     sprite_index = m_combatantSpriteIdle;
@@ -27,5 +29,6 @@ else
   {
     //No wall, falling again
     m_combatantState = CombatantStates.Air;  
+    m_movementSuppressGravity = false;
   }
 }

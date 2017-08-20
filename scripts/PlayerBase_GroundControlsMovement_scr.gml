@@ -31,20 +31,25 @@ else
 
 if(jumpState == ButtonStates.JustPressed)
 {
-  //Jump and change to air state
+  //Change to jump crouch state
   if(!is_undefined(m_movementGroundJumpSpeed))
   {
-    PlayerBase_Jump_scr();
+    m_combatantState = CombatantStates.JumpCrouch;
+    if(sprite_exists(m_combatantSpriteJumpCrouch))
+    {
+      sprite_index = m_combatantSpriteJumpCrouch;
+    }
+    if(!is_undefined(m_combatantImageSpeedJumpCrouch))
+    {
+      image_speed = m_combatantImageSpeedJumpCrouch;
+    }
+    alarm[CombatantAlarms.JumpLag] = m_movementJumpLag;
   }
 }
 
 //Attack
 if(InputManager_GetButtonControlState_scr(ButtonControls.Attack) == ButtonStates.JustPressed)
 {
-  m_combatantState = CombatantStates.GroundAttack;
-  sprite_index = m_combatantSpriteGroundAttack;
-  image_index = 0;
-  m_movementGroundActivelyMoving = false;
-  alarm[1] = sprite_get_number(m_combatantSpriteGroundAttack)/image_speed;
+  Combatant_StartGroundAttack_scr();
 }
 

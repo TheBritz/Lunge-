@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>Enemy_obj</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -31,10 +31,11 @@ event_inherited();
 //The antagonist type is the object type that will be perceived as the enemy
 m_aiAntagonistType = Friendly_obj;
 m_aiTarget = noone;
+m_aiAttackDistance = 30;
 
 //Seed the antagonist scan alarm
-m_aiFriendlyScanRate = round(room_speed/4);
-alarm[11] = irandom(m_friendlyScanRate) + 1;
+m_aiAntagonistScanRate = round(room_speed/4);
+alarm[11] = irandom(m_aiAntagonistScanRate) + 1;
 
 //The distance at which an enemy can see an antagonist
 m_aiSightMaxDist = 1200;
@@ -68,11 +69,11 @@ m_aiSightCone = array(70, -70);
             <string>///Look for a friendly combatant to attack
 
 //Loop through each instance of the Antagonist Type
-with(m_antagonistType)
+with(m_aiAntagonistType)
 {
   //Check if the friendly is close enough to see
   var dist = distance_to_object(other.id);
-  if(dist &lt; m_aiSightMaxDist)
+  if(dist &lt; other.m_aiSightMaxDist)
   {  
     //Friendly is close enough, now check if the view to the friendly is 
     //unobstructed
@@ -80,12 +81,13 @@ with(m_antagonistType)
     if(!instance_exists(hit))
     {
       //Friendly in sight
-      other.m_aiTarget = id; 
+      other.m_aiTarget = id;
+      other.m_aiState = EnemyAIStates.PursueAntagonist;
     } 
   }  
 }
 
-alarm[11] = m_aiFriendlyScanRate;
+alarm[11] = m_aiAntagonistScanRate;
 
 </string>
           </argument>
@@ -109,9 +111,12 @@ alarm[11] = m_aiFriendlyScanRate;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Engage Friendly
-if(instance_exists(m_aiTarget))
+            <string>///State Machine
+switch(m_aiState)
 {
+  case EnemyAIStates.PursueAntagonist:
+    EnemyBase_PursueAntagonist_scr();
+    break;
 }
 </string>
           </argument>

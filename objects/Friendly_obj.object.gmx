@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited();
+m_combatantAttackableType = Enemy_obj
 </string>
           </argument>
         </arguments>

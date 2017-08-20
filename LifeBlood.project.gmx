@@ -17,13 +17,14 @@
   <sprites name="sprites">
     <sprites name="Player">
       <sprite>sprites\Player_spr</sprite>
-      <sprite>sprites\PlayerRunNew_spr</sprite>
       <sprite>sprites\PlayerRun_spr</sprite>
+      <sprite>sprites\PlayerRunOld_spr</sprite>
       <sprite>sprites\PlayerWallCling_spr</sprite>
       <sprite>sprites\PlayerFall_spr</sprite>
       <sprite>sprites\PlayerAttackGroundDash_spr</sprite>
       <sprite>sprites\PlayerGroundAttack_spr</sprite>
       <sprite>sprites\sprite21</sprite>
+      <sprite>sprites\PlayerJumpCrouch_spr</sprite>
       <sprite>sprites\PlayerMaskFull_spr</sprite>
       <sprite>sprites\PlayerMaskFall_spr</sprite>
     </sprites>
@@ -32,6 +33,7 @@
       <sprite>sprites\EnemyCharger_spr</sprite>
       <sprites name="Hollow">
         <sprite>sprites\EnemyHollowGroundAttack_spr</sprite>
+        <sprite>sprites\HitboxHollowMaskSlash_spr</sprite>
         <sprite>sprites\EnemyHollowGroundIdle_spr</sprite>
       </sprites>
     </sprites>
@@ -83,6 +85,7 @@
           <script>scripts\move_outside_solid_with_mask.gml</script>
           <script>scripts\move_until_solid.gml</script>
           <script>scripts\move_until_solid_with_mask.gml</script>
+          <script>scripts\sprite_set_properties.gml</script>
         </scripts>
       </scripts>
       <scripts name="Param Validators">
@@ -111,6 +114,8 @@
         <script>scripts\ConsoleDeleteObjectInstancesOfType_scr.gml</script>
         <script>scripts\ConsoleMetadataDeleteObjectInstancesOfType_scr.gml</script>
         <script>scripts\ConsoleRestartRoom_scr.gml</script>
+        <script>scripts\ConsoleShowHitboxes_scr.gml</script>
+        <script>scripts\ConsoleHideHitboxes_scr.gml</script>
       </scripts>
     </scripts>
     <scripts name="Classes">
@@ -135,6 +140,10 @@
             <script>scripts\Hitbox_PlaceMeeting_scr.gml</script>
             <script>scripts\Hitbox_InstancePlaceList_scr.gml</script>
             <script>scripts\Hitbox_InstancePlace_scr.gml</script>
+            <script>scripts\Hitbox_GetRelativeCoords_scr.gml</script>
+            <script>scripts\Hitbox_Create_scr.gml</script>
+            <script>scripts\Hitbox_CanHit_scr.gml</script>
+            <script>scripts\Hitbox_ExclusionListAdd_scr.gml</script>
           </scripts>
         </scripts>
         <scripts name="Game Controller">
@@ -169,6 +178,14 @@
             <script>scripts\Combatant_AudioCreateEmitters_scr.gml</script>
             <script>scripts\Combatant_CreateAudioEmitter_scr.gml</script>
             <script>scripts\Combatant_ApplyGravity_scr.gml</script>
+            <script>scripts\Combatant_AddHitboxAttack_scr.gml</script>
+            <script>scripts\Combatant_StartGroundAttack_scr.gml</script>
+            <script>scripts\Combatant_GetHit_scr.gml</script>
+            <script>scripts\Combatant_GetAttackDamage_scr.gml</script>
+            <script>scripts\Combatant_SetAttackDamage_scr.gml</script>
+            <script>scripts\Combatant_GetAttackKnockback_scr.gml</script>
+            <script>scripts\Combatant_SetAttackKnockback_scr.gml</script>
+            <script>scripts\Combatant_Jump_scr.gml</script>
           </scripts>
           <scripts name="Public">
             <script>scripts\Combatant_PlaySoundOn_scr.gml</script>
@@ -192,11 +209,20 @@
         </scripts>
         <scripts name="Movable">
           <scripts name="Private">
-            <script>scripts\Movable_ChangeHSpeed_scr.gml</script>
-            <script>scripts\Movable_ChangeVSpeed_scr.gml</script>
             <script>scripts\Movable_Init_scr.gml</script>
             <script>scripts\Movable_HandleMovement_scr.gml</script>
             <script>scripts\Movable_TestControls_scr.gml</script>
+          </scripts>
+          <scripts name="Public">
+            <script>scripts\Movable_ChangeHSpeed_scr.gml</script>
+            <script>scripts\Movable_ChangeVSpeed_scr.gml</script>
+            <script>scripts\Movable_GetHSpeed_scr.gml</script>
+            <script>scripts\Movable_GetVSpeed_scr.gml</script>
+          </scripts>
+        </scripts>
+        <scripts name="EnemyBase">
+          <scripts name="Private">
+            <script>scripts\EnemyBase_PursueAntagonist_scr.gml</script>
           </scripts>
         </scripts>
       </scripts>
@@ -227,6 +253,7 @@
         <object>objects\Enemy_obj</object>
         <objects name="Enemies">
           <object>objects\EnemyBase_obj</object>
+          <object>objects\EnemyHollow_obj</object>
         </objects>
         <objects name="Player">
           <object>objects\PlayerBase_obj</object>

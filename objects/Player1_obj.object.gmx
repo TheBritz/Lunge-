@@ -27,11 +27,7 @@
             <kind>1</kind>
             <string>///Init
 event_inherited();
-m_movementGroundAccelHor = 1;
-m_movementAirFallAccelHor = .75;
-m_movementGroundFriction = .5;
-m_movementGroundMaxSpeed = 8.5;
-m_movementGroundJumpSpeed = 10;
+
 mask_index = Player_spr;
 m_combatantImageSpeedRun = .35;
 </string>

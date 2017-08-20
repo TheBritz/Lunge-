@@ -32,19 +32,34 @@ enum CombatantStates
 {
   Ground,
   Air,
+  FastFall,
   GroundAttack,
   AirAttack,
   Block,
+  HitStun,
+  JumpCrouch,
   None
+}
+
+enum CombatantAlarms
+{
+  GroundReset = 1,
+  JumpLag = 2
 }
 
 //Sprites
 m_combatantSpriteIdle = undefined;
+m_combatantImageSpeedIdle = undefined;
 m_combatantSpriteRun = undefined;
 m_combatantImageSpeedRun = undefined;
 m_combatantSpriteJump = undefined;
 m_combatantSpriteFall = undefined;
 m_combatantSpriteGroundAttack = undefined;
+m_combatantImageSpeedGroundAttack = undefined;
+m_combatantSpriteHitStun = undefined;
+m_combatantImageSpeed = undefined;
+m_combatantSpriteJumpCrouch = undefined;
+m_combatantImageSpeedJumpCrouch = undefined;
 
 //Movement
 m_movementGroundMaxSpeed = undefined;
@@ -52,6 +67,7 @@ m_movementGroundAccelHor = undefined;
 m_movementGroundFriction = undefined;
 m_movementGroundJumpSpeed = undefined;
 m_movementGroundActivelyMoving = undefined;
+m_movementJumpLag = room_speed/15;
 
 //Air
 m_movementAirFlyMaxSpeed = undefined;
@@ -59,10 +75,13 @@ m_movementAirFallMaxSpeedVert = undefined;
 m_movementAirFallMaxSpeedHor = undefined;
 m_movementAirFallAccelHor = undefined;
 m_movementAirGravity = undefined;
+m_movementSuppressGravity = undefined;
 m_movementAirAccelHor = undefined;
 m_movementAirMaxSpeedHor = undefined;
+m_movementAirFastFallSpeed = undefined;
 
 m_combatantState = undefined;
+m_combatantHp = undefined;
 
 //Audio
 enum AudioEmitterTypes
@@ -82,6 +101,15 @@ m_audioJumpInstance = undefined;
 //Attack Sounds
 m_audioGroundAttack = undefined;
 m_audioGroundAttackInstance = undefined;
+
+//Combat Hitboxes
+m_hitboxesAttack = ds_list_create();
+
+//Attack Maps
+m_combatantAttackDamageMap = ds_map_create();
+m_combatantAttackKnockbackMap = ds_map_create();
+m_combatantAttackableType = undefined;
+
 </string>
           </argument>
         </arguments>
@@ -117,6 +145,30 @@ ds_list_destroy(m_audioEmitterList);
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Combatant Jump
+Combatant_Jump_scr();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="1">
       <action>
         <libid>1</libid>
@@ -134,7 +186,7 @@ ds_list_destroy(m_audioEmitterList);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Attack Timer
+            <string>///Ground Reset
 m_combatantState = CombatantStates.Ground;
 </string>
           </argument>
@@ -180,7 +232,28 @@ event_inherited();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>///State Machine
+
+switch(m_combatantState)
+{
+  case CombatantStates.Ground:
+    Combatant_StateGround_scr();
+    break;
+  case CombatantStates.JumpCrouch:
+    Combatant_CollisionSolidGround_scr();
+    break;
+  case CombatantStates.GroundAttack:
+    Combatant_StateGroundAttack_scr();
+    break;
+  case CombatantStates.Air:
+    Combatant_StateAir_scr();
+    break;
+  case CombatantStates.FastFall:
+    Combatant_StateAir_scr();
+    Movable_ChangeVSpeed_scr(m_movementAirFastFallSpeed);
+    break;
+}
+</string>
           </argument>
         </arguments>
       </action>
@@ -200,20 +273,8 @@ event_inherited();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///State Machine
-
-switch(m_combatantState)
-{
-  case CombatantStates.Ground:
-    Combatant_StateGround_scr();
-    break;
-  case CombatantStates.GroundAttack:
-    Combatant_StateGroundAttack_scr();
-    break;
-  case CombatantStates.Air:
-    Combatant_StateAir_scr();
-    break;
-}
+            <string>///Engine
+Combatant_ApplyGravity_scr();
 </string>
           </argument>
         </arguments>
@@ -239,6 +300,71 @@ for(var i = 0; i &lt; ds_list_size(m_audioEmitterList); i++)
 {
   var emitter = m_audioEmitterList[| i];
   audio_emitter_position(emitter, x, y, 0);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Position hitboxes and perform collision checks
+for(var i = 0; i &lt; ds_list_size(m_hitboxesAttack); i++)
+{
+  var hitbox = m_hitboxesAttack[| i];
+  if(instance_exists(hitbox))
+  {
+    var coords = Hitbox_GetRelativeCoords_scr(hitbox);
+    hitbox.image_xscale = image_xscale;
+    hitbox.x = x + coords[0] * m_facing;
+    hitbox.y = y + coords[1];
+    
+    var damage = Combatant_GetAttackDamage_scr(other.sprite_index);
+    if(is_undefined(damage))
+    {
+      damage = 0;
+    }
+    
+    var kbArr = Combatant_GetAttackKnockback_scr(other.sprite_index);
+    if(!is_array(kbArr))
+    {
+      kbArr = array(0, 0); 
+    }
+    
+    with(hitbox)
+    {
+      var hitList = 
+        instance_place_list(x, y, other.m_combatantAttackableType, 1000);
+      for(var ii = 0; ii &lt; ds_list_size(hitList); ii++)
+      {
+        var hit = hitList[| ii];
+        if(Hitbox_CanHit_scr(hitbox, hit))
+        {
+          Hitbox_ExclusionListAdd_scr(hitbox, hit);
+          var kbDirX = sign(hit.x - x);
+          Combatant_GetHit_scr(hit, damage, kbArr[0] * other.m_facing, -kbArr[1]);
+        }
+      }
+    }
+  }
+  else
+  {
+    ds_list_delete(m_hitboxesAttack, i);
+    i--;
+  }
 }
 </string>
           </argument>

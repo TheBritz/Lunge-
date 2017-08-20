@@ -4,6 +4,7 @@
 //Basic Movement
 var leftState = InputManager_GetButtonControlState_scr(ButtonControls.Left);
 var rightState = InputManager_GetButtonControlState_scr(ButtonControls.Right);
+var downState = InputManager_GetButtonControlState_scr(ButtonControls.Down);
 var jumpState = InputManager_GetButtonControlState_scr(ButtonControls.Jump);
 
 var accelHor = 0;
@@ -17,18 +18,15 @@ if(rightState == ButtonStates.Pressed || rightState == ButtonStates.JustPressed)
   accelHor += m_movementAirFallAccelHor;
 }
 
+if(downState == ButtonStates.JustPressed &&
+   Movable_GetVSpeed_scr(id) >= -2)
+{
+  m_combatantState = CombatantStates.FastFall;
+}
+
 if(accelHor != 0)
 {
   Movable_ChangeHSpeed_scr(m_movementAirFallMaxSpeedHor * sign(accelHor), m_movementAirFallAccelHor);
-}
-
-if(jumpState == ButtonStates.JustPressed)
-{
-  //Extra airborne jumps if they remain
-  //if(!is_undefined(m_movementGroundJumpSpeed))
-  //{
-    //vspeed = -m_movementGroundJumpSpeed;
-  //}
 }
 
 //Attack

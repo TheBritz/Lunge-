@@ -7,4 +7,3 @@ if(!is_undefined(m_combatantSpriteFall))
 
 Combatant_LimitAirSpeed_scr();
 Combatant_CollisionSolidAir_scr();
-Combatant_ApplyGravity_scr();
