@@ -27,6 +27,7 @@
       <sprite>sprites\PlayerJumpCrouch_spr</sprite>
       <sprite>sprites\PlayerMaskFull_spr</sprite>
       <sprite>sprites\PlayerMaskFall_spr</sprite>
+      <sprite>sprites\PlayerRunDirectionChange_spr</sprite>
     </sprites>
     <sprites name="Enemies">
       <sprite>sprites\EnemySlime_spr</sprite>
@@ -186,6 +187,7 @@
             <script>scripts\Combatant_GetAttackKnockback_scr.gml</script>
             <script>scripts\Combatant_SetAttackKnockback_scr.gml</script>
             <script>scripts\Combatant_Jump_scr.gml</script>
+            <script>scripts\script109.gml</script>
           </scripts>
           <scripts name="Public">
             <script>scripts\Combatant_PlaySoundOn_scr.gml</script>

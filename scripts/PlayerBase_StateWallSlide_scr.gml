@@ -28,7 +28,8 @@ else
   if(!Hitbox_PlaceMeeting_scr(hitboxX, y + 20, Solid_obj, HitboxWallCheckSmall_spr))
   {
     //No wall, falling again
-    m_combatantState = CombatantStates.Air;  
+    m_combatantState = CombatantStates.Air;
+    m_playerState = PlayerStates.None;
     m_movementSuppressGravity = false;
   }
 }

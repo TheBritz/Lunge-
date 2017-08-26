@@ -60,6 +60,8 @@ m_combatantSpriteHitStun = undefined;
 m_combatantImageSpeed = undefined;
 m_combatantSpriteJumpCrouch = undefined;
 m_combatantImageSpeedJumpCrouch = undefined;
+m_combatantSpriteDirectionChange = undefined;
+m_combatantImageSpeedDirectionChange = undefined;
 
 //Movement
 m_movementGroundMaxSpeed = undefined;

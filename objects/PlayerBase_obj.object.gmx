@@ -53,7 +53,8 @@ m_combatantSpriteRun = PlayerRun_spr;
 m_playerSpriteWallCling = PlayerWallCling_spr;
 m_combatantSpriteGroundAttack = PlayerAttackGroundDash_spr;
 m_combatantSpriteJumpCrouch = PlayerJumpCrouch_spr;
-m_combatantImageSpeedGroundAttack = 15/room_speed;
+m_combatantImageSpeedGroundAttack = 18/room_speed;
+m_combatantSpriteDirectionChange = PlayerRunDirectionChange_spr;
 
 m_combatantState = CombatantStates.Ground;
 
@@ -76,7 +77,7 @@ m_playerMovementWallSlideGravity = .07;
 m_playerMovementWallSlideMaxSpeed = 5;
 m_playerMovementJumpGrav = global.Gravity * .7;
 m_playerMovementModifyGrav = false;
-m_playerMovementJumpLag = room_speed/10;
+m_movementJumpLag = room_speed/12;
 m_playerMovementJumpShortSpeed = m_movementGroundJumpSpeed * .75; 
 m_playerWallLatchJumpSpeed = 10;
 m_playerWallSlideJumpSpeed = 8.5;
@@ -147,29 +148,10 @@ PlayerBase_Jump_scr();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///State Machine
-
-switch(m_combatantState)
+            <string>///Wall-latch to Wall-slide alarm
+if(m_playerState == PlayerStates.WallLatch)
 {
-  case CombatantStates.Ground:
-    PlayerBase_StateGround_scr();
-    break;
-  case CombatantStates.Air:
-    PlayerBase_AirControlsMovement_scr();
-    break;
-  case CombatantStates.FastFall:
-    PlayerBase_AirControlsMovement_scr();
-    break;
-}
-
-switch(m_playerState)
-{
-  case PlayerStates.WallLatch:
-    PlayerBase_StateWallLatch_scr();  
-    break;
-  case PlayerStates.WallSlide:
-    PlayerBase_StateWallSlide_scr();
-    break;
+  m_playerState = PlayerStates.WallSlide;
 }
 </string>
           </argument>
@@ -202,6 +184,9 @@ switch(m_combatantState)
     break;
   case CombatantStates.Air:
     PlayerBase_AirControlsMovement_scr();
+    break;
+  case CombatantStates.FastFall:
+    PlayerBase_AirControlsMovement_scr();   
     break;
 }
 
