@@ -12,13 +12,17 @@ if(m_collideH != 0 || m_collideV != 0)
     if(object_is(object_index, PlayerBase_obj))
     {
       //We are now facing left
-      if(abs(m_impactVelH) >= m_playerWallLatchSpeedThresh)
+      var isWallPositionCorrect = PlayerBase_WallSlideCheckForWall_scr(m_collideH);
+      if(isWallPositionCorrect)
       {
-        PlayerBase_StateTransitionWallLatch_scr(-m_collideH);
-      }
-      else if(abs(m_impactVelH) >= m_playerWallSlideSpeedThresh)
-      {
-        PlayerBase_StateTransitionWallSlide_scr(-m_collideH);
+        if(abs(m_impactVelH) >= m_playerWallLatchSpeedThresh)
+        {
+          PlayerBase_StateTransitionWallLatch_scr(-m_collideH);
+        }
+        else if(abs(m_impactVelH) >= m_playerWallSlideSpeedThresh)
+        {
+          PlayerBase_StateTransitionWallSlide_scr(-m_collideH);
+        }
       }
     }
   }

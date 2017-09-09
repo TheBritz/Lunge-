@@ -20,12 +20,7 @@ else
     sprite_index = m_combatantSpriteIdle;
   }
   
-  //Check if there is a wall still
-  var spriteOrigX = sprite_get_xoffset(sprite_index);
-  var spriteWidth = sprite_get_width(sprite_index);
-  var centerPointX = x - spriteOrigX + spriteWidth/2;
-  var hitboxX = centerPointX + (spriteWidth/2 + 10) * -m_facing ;
-  if(!Hitbox_PlaceMeeting_scr(hitboxX, y + 20, Solid_obj, HitboxWallCheckSmall_spr))
+  if(!PlayerBase_WallSlideCheckForWall_scr(m_facing, -1))
   {
     //No wall, falling again
     m_combatantState = CombatantStates.Air;

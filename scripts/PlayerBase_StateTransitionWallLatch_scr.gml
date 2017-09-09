@@ -14,7 +14,7 @@ if(object_is(object_index, PlayerBase_obj))
     m_playerState = PlayerStates.WallLatch;
     m_combatantState = CombatantStates.None;
     alarm[0] = m_playerMovementWallLatchTime;
-    sprite_index = PlayerWallCling_spr;
+    sprite_index = m_playerSpriteWallCling;
   }
 }
 

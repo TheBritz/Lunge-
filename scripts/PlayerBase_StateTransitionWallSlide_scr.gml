@@ -13,7 +13,7 @@ if(object_is(object_index, PlayerBase_obj))
     Movable_ChangeHSpeed_scr(0);
     m_playerState = PlayerStates.WallSlide;
     m_combatantState = CombatantStates.None;
-    sprite_index = PlayerWallCling_spr;
+    sprite_index = m_playerSpriteWallCling;
   }
 }
 
