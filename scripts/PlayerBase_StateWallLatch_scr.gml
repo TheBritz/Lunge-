@@ -1,6 +1,7 @@
 m_velocityV = 0;
 m_velocityH = 0;
 
+m_spearCanDetonate = true;
 if(InputManager_GetButtonControlState_scr(ButtonControls.Jump) == ButtonStates.JustPressed)
 {
   Movable_ChangeVSpeed_scr(-m_playerWallLatchJumpSpeed);

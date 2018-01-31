@@ -203,7 +203,7 @@ if(effectiveIndex != m_lastImageIndex || isNewSpriteIndex)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Increment frame number
+            <string>///Increment frame number
 m_frameNumber++;
 </string>
           </argument>

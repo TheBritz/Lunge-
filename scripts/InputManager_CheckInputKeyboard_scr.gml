@@ -1,3 +1,4 @@
+//Keyboard
 for(var i = 0; i < ds_list_size(m_keysList); i++)
 {
   var key = m_keysList[| i];
@@ -19,3 +20,24 @@ for(var i = 0; i < ds_list_size(m_keysList); i++)
     m_buttonControlStates[? control] = ButtonStates.Released; 
   }
 }
+
+//Gamepad (presses override keyboard)
+for(var i = 0; i < ds_list_size(m_gamepadList); i++)
+{
+  var btn = m_gamepadList[| i];
+  var control = m_gamepadToButtonControlMap[? btn];
+  //Hard-coding for now, but device index should be properly addressed
+  if(gamepad_button_check_pressed(0, btn))
+  {
+    m_buttonControlStates[? control] = ButtonStates.JustPressed;
+  }
+  else if(gamepad_button_check_released(0, btn))
+  {
+    m_buttonControlStates[? control] = ButtonStates.JustReleased;
+  }
+  else if(gamepad_button_check(0, btn))
+  {
+    m_buttonControlStates[? control] = ButtonStates.Pressed;
+  }
+}
+  

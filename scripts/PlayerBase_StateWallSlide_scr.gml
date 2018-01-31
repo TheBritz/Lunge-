@@ -1,5 +1,5 @@
 Movable_ChangeVSpeed_scr(m_playerMovementWallSlideMaxSpeed, m_playerMovementWallSlideGravity);
-
+m_spearCanDetonate = true;
 if(InputManager_GetButtonControlState_scr(ButtonControls.Jump) == ButtonStates.JustPressed)
 {
   Movable_ChangeVSpeed_scr(-m_playerWallSlideJumpSpeed);

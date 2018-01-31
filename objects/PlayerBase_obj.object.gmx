@@ -28,6 +28,27 @@
             <string>///PlayerBase_obj Init
 event_inherited();
 
+enum PlayerBaseAlarms
+{
+  ResetIsLunging = 3,
+  ResetCanLunge = 4
+}
+
+//Spear
+m_spear = noone;
+m_spearChargeAmount = 2.5;
+m_spearCanDetonate = true;
+m_spearLungeDist = 60;
+m_spearLungeAdjust = 0;
+m_spearLungeAngle = undefined;
+m_spearHoldX = 0;
+m_spearHoldY = 0;
+m_spearIsLunging = false;
+m_spearLungeTime = 8;
+m_spearLungeDelay = 12;
+m_spearCanLunge = true;
+m_playerIndex = undefined;
+
 //Unique Player States
 enum PlayerStates
 {
@@ -107,6 +128,55 @@ Combatant_SetAttackKnockback_scr(PlayerAttackGroundDash_spr, 5, 5);
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Reset m_spearCanLunge
+m_spearCanLunge = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Reset m_spearIslunging
+m_spearIsLunging = false;
+m_spearLungeAdjust = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="2">
       <action>
         <libid>1</libid>
@@ -158,7 +228,159 @@ if(m_playerState == PlayerStates.WallLatch)
         </arguments>
       </action>
     </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Position Spear
+
+if(instance_exists(m_spear))
+{
+  var spearAngle = undefined;
+  if(keyboard_check(vk_left) &amp;&amp; !keyboard_check(vk_right))
+  {
+    if(keyboard_check(vk_up))
+    {
+      spearAngle = 135; 
+    }
+    else if(keyboard_check(vk_down))
+    {
+      spearAngle = 225;
+    }
+    else
+    {
+      spearAngle = 180;
+    }
+  }
+  else if(keyboard_check(vk_right) &amp;&amp; !keyboard_check(vk_left))
+  {
+    if(keyboard_check(vk_up))
+    {
+      spearAngle = 45; 
+    }
+    else if(keyboard_check(vk_down))
+    {
+      spearAngle = 315;
+    }
+    else
+    {
+      spearAngle = 0;
+    }
+  }
+  else if(keyboard_check(vk_down) &amp;&amp; !keyboard_check(vk_up))
+  {
+    spearAngle = 270;
+  }
+  else if(keyboard_check(vk_up) &amp;&amp; !keyboard_check(vk_down))
+  {
+    spearAngle = 90;
+  }
+    
+  var gpdSpearAngle = GamepadGetDirectionFromStickAxes_scr(0, GameStick.Right);
+  if(!is_undefined(gpdSpearAngle))
+  {
+    spearAngle = gpdSpearAngle; 
+  } 
+  
+  if(m_spearCanLunge &amp;&amp; InputManager_GetButtonControlState_scr(ButtonControls.Attack) == ButtonStates.JustPressed)
+  {
+    m_spearLungeAdjust = m_spearLungeDist;
+    m_lungeAngle = m_spear.image_angle;
+    m_spearCanLunge = false;
+    m_spearIsLunging = true;
+    alarm[PlayerBaseAlarms.ResetIsLunging] = m_spearLungeTime;
+    alarm[PlayerBaseAlarms.ResetCanLunge] = m_spearLungeDelay;
+  }
+  
+  var xAdjust = 0;
+  var yAdjust = 0;
+  if(!is_undefined(spearAngle)) 
+  {
+    m_spear.image_angle = spearAngle;
+  }
+  
+  if(m_spearLungeAdjust != 0)
+  {
+    xAdjust = lengthdir_x(m_spearLungeAdjust, m_spear.image_angle);
+    yAdjust = lengthdir_y(m_spearLungeAdjust, m_spear.image_angle);
+  }
+  
+  m_spear.x = x + xAdjust;
+  m_spear.y = y + yAdjust;
+  m_spear.depth = depth - 1;
+  
+  if(InputManager_GetButtonControlState_scr(ButtonControls.Detonate) == ButtonStates.JustPressed)
+  {
+    if(m_spearCanLunge &amp;&amp; instance_exists(PlayerSpear_Detonate_scr(m_spear)))
+    {
+      Movable_AddMotion_scr(id, m_spear.image_angle + 180, 10);
+      m_spearCanDetonate = false;      
+    }
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Inherited Events
+event_inherited();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Charge Spear
+PlayerSpear_AddCharge_scr(m_spear, m_spearChargeAmount);
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>

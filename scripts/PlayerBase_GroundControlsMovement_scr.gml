@@ -1,27 +1,41 @@
 ///Read Controls
 //trace("Step " + string(global.StepNumber) + ": PlayerBase_GroundControlsMovement_scr");
-
-//Basic Movement
-var leftState = InputManager_GetButtonControlState_scr(ButtonControls.Left);
-var rightState = InputManager_GetButtonControlState_scr(ButtonControls.Right);
-var jumpState = InputManager_GetButtonControlState_scr(ButtonControls.Jump);
-
 var accelHor = 0;
-if(leftState == ButtonStates.Pressed || leftState == ButtonStates.JustPressed)
-{
-  accelHor -= m_movementGroundAccelHor;
-  m_facing = -1;
-}
 
-if(rightState == ButtonStates.Pressed || rightState == ButtonStates.JustPressed)
+//Left Joystick State
+var deadzone = .2;
+var speedMaxMod = 1;
+var hState = gamepad_axis_value(m_playerIndex, gp_axislh);
+var vState = gamepad_axis_value(m_playerIndex, gp_axislv);
+
+if(abs(hState) < deadzone && abs(vState) < deadzone)
 {
-  accelHor += m_movementGroundAccelHor;
-  m_facing = 1;
+  //Kbd Movement
+  var leftStateKbd = InputManager_GetButtonControlState_scr(ButtonControls.Left);
+  var rightStateKbd = InputManager_GetButtonControlState_scr(ButtonControls.Right);
+   
+  if(leftStateKbd == ButtonStates.Pressed || leftStateKbd == ButtonStates.JustPressed)
+  {
+    accelHor -= m_movementGroundAccelHor;
+    m_facing = -1;
+  }
+  
+  if(rightStateKbd == ButtonStates.Pressed || rightStateKbd == ButtonStates.JustPressed)
+  {
+    accelHor += m_movementGroundAccelHor;
+    m_facing = 1;
+  }
+}
+else
+{
+  m_facing = sign(hState);
+  accelHor = m_facing * m_movementGroundAccelHor;
+  speedMaxMod = hState;
 }
 
 if(accelHor != 0)
 {
-  Movable_ChangeHSpeed_scr(m_movementGroundMaxSpeed * m_facing, m_movementGroundAccelHor);
+  Movable_ChangeHSpeed_scr(m_movementGroundMaxSpeed * m_facing * abs(speedMaxMod), m_movementGroundAccelHor);
   m_movementGroundActivelyMoving = true;
 }
 else
@@ -29,6 +43,7 @@ else
   m_movementGroundActivelyMoving = false;
 }
 
+var jumpState = InputManager_GetButtonControlState_scr(ButtonControls.Jump);
 if(jumpState == ButtonStates.JustPressed)
 {
   //Change to jump crouch state
@@ -47,9 +62,19 @@ if(jumpState == ButtonStates.JustPressed)
   }
 }
 
+var detonateState = InputManager_GetButtonControlState_scr(ButtonControls.Detonate);
+if(detonateState == ButtonStates.JustPressed || detonateState == ButtonStates.Pressed)
+{
+  //Detonate spear
+  if(m_spear.m_canDetonate)
+  {
+    
+  }  
+}
+
 //Attack
 if(InputManager_GetButtonControlState_scr(ButtonControls.Attack) == ButtonStates.JustPressed)
 {
-  Combatant_StartGroundAttack_scr();
+  //Combatant_StartGroundAttack_scr();
 }
 

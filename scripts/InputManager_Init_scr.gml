@@ -1,5 +1,7 @@
 m_keyToButtonControlMap = ds_map_create();
 m_keysList = ds_list_create();
+m_gamepadToButtonControlMap = ds_map_create();
+m_gamepadList = ds_list_create();
 m_buttonControlStates = ds_map_create();
 
 //Init button control state map (all states should start released)

@@ -46,6 +46,7 @@ enum ButtonControls
   Up,
   Attack,
   Jump,
-  Block
+  Block,
+  Detonate
 }
 
