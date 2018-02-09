@@ -5,7 +5,6 @@ var imgSpd = argument2;
 
 if(sprite_exists(spr) && !is_undefined(spr))
 {
-  var slimeSpr = asset_get_index("EnemySlime_spr");
   sprite_index = spr;
   if(!is_undefined(imgInd))
   {

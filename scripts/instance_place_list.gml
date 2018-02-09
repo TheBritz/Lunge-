@@ -36,7 +36,7 @@ else
 var hit = instance_place(x, y, obj);
 if(instance_exists(hit))
 {
-  if(++hits < limit)
+  if(hits++ < limit)
   {
     if(hit.solid || !checkSolid)
     {

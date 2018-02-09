@@ -11,6 +11,16 @@ with spear
     var detonation = instance_create(coords[0], coords[1], SpearDetonation_obj);
     detonation.depth = depth - 1;
     m_charge -= m_chargeToDetonate;
+    var enemy;
+    for(var i = 0; i < ds_list_size(m_skeweredEnemies); i++)
+    {
+      enemy = m_skeweredEnemies[| i];
+      enemy.speed = 15; 
+      enemy.direction = image_angle;
+      enemy.gravity = .2;
+      enemy.sprite_index = EnemyHollowLaunched_spr;
+    } 
+    ds_list_clear(m_skeweredEnemies);
     return detonation;
   }
   return noone;

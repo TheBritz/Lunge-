@@ -17,11 +17,11 @@ if(m_collideH != 0 || m_collideV != 0)
       {
         if(abs(m_impactVelH) >= m_playerWallLatchSpeedThresh)
         {
-          PlayerBase_StateTransitionWallLatch_scr(-m_collideH);
+          //PlayerBase_StateTransitionWallLatch_scr(-m_collideH);
         }
         else if(abs(m_impactVelH) >= m_playerWallSlideSpeedThresh)
         {
-          PlayerBase_StateTransitionWallSlide_scr(-m_collideH);
+          //PlayerBase_StateTransitionWallSlide_scr(-m_collideH);
         }
       }
     }

@@ -1,9 +1,19 @@
-///Combatant_AddHitbox_scr(args[mask, relativeX, relativeY, framesToLive])
-var args = argument0;
+///Combatant_AddHitboxAttack_scr(<args> mask, relativeX, relativeY, framesToLive)
+var args = argument[0];
 var i = 0;
-var mask = args[i++];
-var relPosX = args[i++];
-var relPosY = args[i++];
+var mask, relPosX, relPosY;
+if(is_array(args))
+{
+  mask = args[i++];
+  relPosX = args[i++];
+  relPosY = args[i++];
+}
+else
+{
+  mask = argument[i++];
+  relPosX = args[i++];
+  relPosY = args[i++];  
+}
 
 var ttl = -1;
 if(array_length_1d(args) > i)

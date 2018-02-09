@@ -47,6 +47,8 @@ m_spearIsLunging = false;
 m_spearLungeTime = 8;
 m_spearLungeDelay = 12;
 m_spearCanLunge = true;
+m_spearHoldAngleIncrement = 20;
+
 m_playerIndex = undefined;
 
 //Unique Player States
@@ -245,6 +247,28 @@ if(m_playerState == PlayerStates.WallLatch)
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Inherited Events
+event_inherited();
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Position Spear
 
 if(instance_exists(m_spear))
@@ -292,24 +316,51 @@ if(instance_exists(m_spear))
   var gpdSpearAngle = GamepadGetDirectionFromStickAxes_scr(0, GameStick.Right);
   if(!is_undefined(gpdSpearAngle))
   {
-    spearAngle = gpdSpearAngle; 
+    spearAngle = PlayerBase_GetClosestSpearHoldAngle_scr(id, gpdSpearAngle); 
   } 
   
-  if(m_spearCanLunge &amp;&amp; InputManager_GetButtonControlState_scr(ButtonControls.Attack) == ButtonStates.JustPressed)
+  if(InputManager_GetButtonControlState_scr(ButtonControls.Attack) == ButtonStates.JustPressed)
   {
-    m_spearLungeAdjust = m_spearLungeDist;
-    m_lungeAngle = m_spear.image_angle;
-    m_spearCanLunge = false;
-    m_spearIsLunging = true;
-    alarm[PlayerBaseAlarms.ResetIsLunging] = m_spearLungeTime;
-    alarm[PlayerBaseAlarms.ResetCanLunge] = m_spearLungeDelay;
+    if(is_undefined(m_spear.m_imbedPointX))
+    {
+      if(m_spearCanLunge)
+      {
+        m_spearLungeAdjust = m_spearLungeDist;
+        m_lungeAngle = m_spear.image_angle;
+        m_spearCanLunge = false;
+        m_spearIsLunging = true;
+        m_spear.m_isLunging = true;
+        alarm[PlayerBaseAlarms.ResetIsLunging] = m_spearLungeTime;
+        alarm[PlayerBaseAlarms.ResetCanLunge] = m_spearLungeDelay;
+        PlayerSpear_Attack_scr(m_spear);
+      }
+    }
+    else
+    {
+      //Pull spear out of object
+      m_spear.m_imbedPointX = undefined;
+      m_spear.m_imbedPointY = undefined;
+    }
   }
   
   var xAdjust = 0;
   var yAdjust = 0;
-  if(!is_undefined(spearAngle)) 
+  var imbedCoords; 
+  if(!is_undefined(spearAngle) &amp;&amp; !m_spearIsLunging) 
   {
-    m_spear.image_angle = spearAngle;
+    imbedCoords = PlayerSpear_SetAngle_scr(m_spear, spearAngle); 
+  }
+  else
+  {
+    imbedCoords = PlayerSpear_SetAngle_scr(m_spear, m_spear.image_angle); 
+  }
+  
+  if(is_array(imbedCoords))
+  {
+    x = imbedCoords[0];
+    y = imbedCoords[1];
+    m_velocityH = 0;
+    m_velocityV = 0;
   }
   
   if(m_spearLungeAdjust != 0)
@@ -321,38 +372,17 @@ if(instance_exists(m_spear))
   m_spear.x = x + xAdjust;
   m_spear.y = y + yAdjust;
   m_spear.depth = depth - 1;
+  PlayerSpear_PositionSkeweredEnemies_scr(m_spear);
   
   if(InputManager_GetButtonControlState_scr(ButtonControls.Detonate) == ButtonStates.JustPressed)
   {
-    if(m_spearCanLunge &amp;&amp; instance_exists(PlayerSpear_Detonate_scr(m_spear)))
+    if(m_spearCanDetonate &amp;&amp; instance_exists(PlayerSpear_Detonate_scr(m_spear)))
     {
       Movable_AddMotion_scr(id, m_spear.image_angle + 180, 10);
       m_spearCanDetonate = false;      
     }
   }
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Inherited Events
-event_inherited();
 </string>
           </argument>
         </arguments>

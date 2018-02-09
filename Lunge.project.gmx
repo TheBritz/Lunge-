@@ -31,6 +31,8 @@
       <sprite>sprites\PlayerMaskFall_spr</sprite>
       <sprite>sprites\PlayerRunDirectionChange_spr</sprite>
       <sprite>sprites\PlayerSpear_spr</sprite>
+      <sprite>sprites\PlayerSpearLunging_spr</sprite>
+      <sprite>sprites\HitboxPlayerSpear_spr</sprite>
       <sprite>sprites\Detonation_spr</sprite>
     </sprites>
     <sprites name="Enemies">
@@ -38,6 +40,7 @@
       <sprite>sprites\EnemyCharger_spr</sprite>
       <sprites name="Hollow">
         <sprite>sprites\EnemyHollowGroundAttack_spr</sprite>
+        <sprite>sprites\EnemyHollowLaunched_spr</sprite>
         <sprite>sprites\HitboxHollowMaskSlash_spr</sprite>
         <sprite>sprites\EnemyHollowGroundIdle_spr</sprite>
       </sprites>
@@ -49,6 +52,7 @@
       <sprite>sprites\HitboxWallCheckSmall_spr</sprite>
       <sprite>sprites\HitboxFloorCheckNarrow_spr</sprite>
       <sprite>sprites\HitboxPlayerSlash_spr</sprite>
+      <sprite>sprites\PlayerSpearMaskAttack_spr</sprite>
     </sprites>
     <sprites name="Environment">
       <sprite>sprites\SolidTest_spr</sprite>
@@ -201,6 +205,7 @@
           </scripts>
           <scripts name="Public">
             <script>scripts\Combatant_PlaySoundOn_scr.gml</script>
+            <script>scripts\Combatant_GetState_scr.gml</script>
           </scripts>
         </scripts>
         <scripts name="PlayerBase">
@@ -211,6 +216,7 @@
             <script>scripts\PlayerBase_Jump_scr.gml</script>
             <script>scripts\PlayerBase_PlayRunStepSound_scr.gml</script>
             <script>scripts\PlayerBase_WallSlideCheckForWall_scr.gml</script>
+            <script>scripts\PlayerBase_GetClosestSpearHoldAngle_scr.gml</script>
           </scripts>
           <scripts name="States">
             <script>scripts\PlayerBase_StateGround_scr.gml</script>
@@ -245,6 +251,11 @@
           <script>scripts\PlayerSpear_Detonate_scr.gml</script>
           <script>scripts\PlayerSpear_AddCharge_scr.gml</script>
           <script>scripts\PlayerSpear_CanDetonate_scr.gml</script>
+          <script>scripts\PlayerSpear_Attack_scr.gml</script>
+          <script>scripts\PlayerSpear_CanStrike_scr.gml</script>
+          <script>scripts\PlayerSpear_SkewerEnemy_scr.gml</script>
+          <script>scripts\PlayerSpear_PositionSkeweredEnemies_scr.gml</script>
+          <script>scripts\PlayerSpear_SetAngle_scr.gml</script>
         </scripts>
       </scripts>
     </scripts>
@@ -279,6 +290,7 @@
         <object>objects\Enemy_obj</object>
         <objects name="Enemies">
           <object>objects\EnemyBase_obj</object>
+          <object>objects\EnemySkewered_obj</object>
           <object>objects\EnemyHollow_obj</object>
         </objects>
         <objects name="Player">
