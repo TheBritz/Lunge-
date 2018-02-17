@@ -19,6 +19,7 @@
   <sprites name="sprites">
     <sprites name="Player">
       <sprite>sprites\Player_spr</sprite>
+      <sprite>sprites\PlayerMaskDiamond_spr</sprite>
       <sprite>sprites\PlayerRun_spr</sprite>
       <sprite>sprites\PlayerRunOld_spr</sprite>
       <sprite>sprites\PlayerWallCling_spr</sprite>
@@ -64,6 +65,7 @@
       <sprite>sprites\WallMoss_spr</sprite>
       <sprite>sprites\WallBase_spr</sprite>
       <sprite>sprites\WallBaseBig_spr</sprite>
+      <sprite>sprites\SolidSloped_spr</sprite>
     </sprites>
     <sprites name="Console">
       <sprite>sprites\console_spr</sprite>
@@ -166,6 +168,12 @@
             <script>scripts\GameController_InitGlobals_scr.gml</script>
           </scripts>
         </scripts>
+        <scripts name="SolidSloped">
+          <scripts name="Public">
+            <script>scripts\SolidSloped_GetSolidY_scr.gml</script>
+            <script>scripts\SolidSloped_CollisionCheck_scr.gml</script>
+          </scripts>
+        </scripts>
       </scripts>
       <scripts name="Entities">
         <scripts name="Entity">
@@ -230,6 +238,7 @@
           <scripts name="Private">
             <script>scripts\Movable_Init_scr.gml</script>
             <script>scripts\Movable_HandleMovement_scr.gml</script>
+            <script>scripts\Movable_CheckSlopeCollision_scr.gml</script>
             <script>scripts\Movable_TestControls_scr.gml</script>
           </scripts>
           <scripts name="Public">
@@ -302,6 +311,7 @@
         </objects>
       </objects>
       <objects name="Environment">
+        <object>objects\SolidSloped_obj</object>
         <object>objects\Solid_obj</object>
         <object>objects\CombatChamber_obj</object>
         <object>objects\ElevatorShaft_obj</object>
@@ -311,6 +321,7 @@
     </objects>
     <objects name="Debug">
       <object>objects\HitboxRepresentation_obj</object>
+      <object>objects\object25</object>
     </objects>
     <objects name="Console">
       <object>objects\console_obj</object>
@@ -318,6 +329,7 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\room1</room>
+    <room>rooms\room2</room>
     <room>rooms\room0</room>
   </rooms>
   <help>

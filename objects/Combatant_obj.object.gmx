@@ -69,6 +69,7 @@ m_movementGroundAccelHor = undefined;
 m_movementGroundFriction = undefined;
 m_movementGroundJumpSpeed = undefined;
 m_movementGroundActivelyMoving = undefined;
+m_movementGroundGravityMod = undefined;
 m_movementJumpLag = room_speed/15;
 
 //Air
@@ -276,7 +277,24 @@ switch(m_combatantState)
           <argument>
             <kind>1</kind>
             <string>///Engine
-Combatant_ApplyGravity_scr();
+var grav = m_movementAirGravity;
+if(is_undefined(grav))
+{
+  grav = global.Gravity;
+}
+
+var state = Combatant_GetState_scr(id);
+if((state == CombatantStates.Ground || 
+   state == CombatantStates.GroundAttack) &amp;&amp; 
+   !is_undefined(m_movementGroundGravityMod))
+{
+  grav *= m_movementGroundGravityMod;
+}
+else
+{
+  var test = "test";
+}
+Combatant_ApplyGravity_scr(grav);
 </string>
           </argument>
         </arguments>

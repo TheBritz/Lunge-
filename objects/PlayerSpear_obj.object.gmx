@@ -39,7 +39,7 @@ m_skeweredEnemies = ds_list_create();
 mask_index = HitboxPlayerSpear_spr;
 m_skewerPosX = sprite_width - sprite_xoffset - 12;
 m_skewerPosY = 0;
-m_imbedPosX = sprite_width - sprite_xoffset - 6;
+m_imbedPosX = sprite_width - sprite_xoffset - 3;
 m_imbedPointX = undefined;
 m_imbedPointY = undefined;
 </string>
@@ -104,33 +104,33 @@ if(PlayerSpear_CanStrike_scr(id))
 if(PlayerSpear_CanStrike_scr(id) &amp;&amp; instance_exists(m_wielder) &amp;&amp; 
    Combatant_GetState_scr(m_wielder) == CombatantStates.Air)
 {
-  var hit = instance_place(x, y, Solid_obj);
-  
-  if(instance_exists(hit))
+  if(place_meeting(x, y, Solid_obj))
   {
     //Find the point of entry
     var incX = lengthdir_x(2, image_angle);
     var incY = lengthdir_y(2, image_angle);
     var xx = x;
     var yy = y;
+    var xMod = 0;
+    var yMod = 0;
     var maxX = x + lengthdir_x(m_imbedPosX, image_angle);
     var length;
     do
     {
-      hit = collision_point(xx, yy, Solid_obj, false, false);
+      hit = collision_point(x + xMod, y + yMod, Solid_obj, false, false);
       if(instance_exists(hit))
       {
-        m_imbedPointX = xx;
-        m_imbedPointY = yy;
+        m_imbedPointX = x + xMod;
+        m_imbedPointY = y + yMod;
         break;
       }
-      xx += incX;
-      yy += incY;
-    }until(xx &gt; maxX)
+      xMod += incX;
+      yMod += incY;
+    }until(abs(xMod) &gt; maxX)
   }
 }
 
-//Wall latch positioning
+
 
 </string>
           </argument>

@@ -1,30 +1,44 @@
 ///Movable_HandleMovement_scr()
+var xStart = x;
 
 // Handle sub-pixel movement
 m_subH += m_velocityH;
-m_subV += m_velocityV;
 var roundedVelocityH = round(m_subH);
-var roundedVelocityV = round(m_subV);
 m_subH -= roundedVelocityH;
-m_subV -= roundedVelocityV;
 
 // Horizontal Movement
 if(roundedVelocityH = 0) m_impactVelH = 0;
 repeat (abs(roundedVelocityH)) 
 {
   if (!place_meeting(x + sign(roundedVelocityH), y, Solid_obj))
+  {
     x += sign(roundedVelocityH); 
+  }
   else 
   {
-    m_collideH = sign(m_velocityH);
-    m_impactVelH = m_velocityH;
-    m_velocityH = 0;
-    break;
+    //Before accepting the horizontal collision, check to see if we should be
+    //adjusted higher due to a solid slope
+    Movable_CheckSlopeCollision_scr();
+    if(place_meeting(x + sign(roundedVelocityH), y, Solid_obj))
+    {
+      m_collideH = sign(m_velocityH);
+      m_impactVelH = m_velocityH;
+      m_velocityH = 0;
+      break;
+    }
+    else
+    {
+      var test = "test";
+    }
   }
   m_collideH = 0;
   m_impactVelH = 0;
 }  
-    
+
+m_subV += m_velocityV;    
+var roundedVelocityV = round(m_subV);
+m_subV -= roundedVelocityV;
+
 // Vertical Movement
 if(roundedVelocityV = 0) m_impactVelV = 0;
 repeat (abs(roundedVelocityV))
@@ -41,3 +55,15 @@ repeat (abs(roundedVelocityV))
   m_collideV = 0;
   m_impactVelV = 0;
 }
+
+Movable_CheckSlopeCollision_scr();
+
+var flatYCollision = m_impactVelV > 0;
+var preCheckY = y;
+
+if(flatYCollision && y > preCheckY)
+{
+  y = preCheckY;
+}
+
+

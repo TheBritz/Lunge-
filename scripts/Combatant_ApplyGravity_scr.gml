@@ -1,8 +1,14 @@
+///Combatant_ApplyGravity_scr(gravity [optional])
+
 if(!m_movementSuppressGravity)
 {
   var terminalVelocity = global.TerminalVelocity;
   var grav = global.Gravity;
-  if(!is_undefined(m_movementAirGravity))
+  if(argument_count > 0)
+  {
+    grav = argument[0];
+  }
+  else if(!is_undefined(m_movementAirGravity))
   {
     grav = m_movementAirGravity;
   }
