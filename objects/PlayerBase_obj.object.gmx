@@ -42,7 +42,7 @@ m_movementGroundGravityMod = 4;
 m_spear = noone;
 m_spearChargeAmount = 2.5;
 m_spearCanDetonate = true;
-m_spearLungeDist = 60;
+m_spearLungeDist = 30;
 m_spearLungeAdjust = 0;
 m_spearLungeAngle = undefined;
 m_spearHoldX = 0;
@@ -51,7 +51,8 @@ m_spearIsLunging = false;
 m_spearLungeTime = 8;
 m_spearLungeDelay = 12;
 m_spearCanLunge = true;
-m_spearHoldAngleIncrement = 20;
+m_spearHoldAngleIncrement = 22.5;
+m_spearDetonationSpeed = 12;
 
 m_playerIndex = undefined;
 
@@ -86,14 +87,16 @@ m_combatantSpriteDirectionChange = PlayerRunDirectionChange_spr;
 m_combatantState = CombatantStates.Ground;
 
 //Combatant Movement
-m_movementGroundMaxSpeed = 6;
+
 m_movementAirFallMaxSpeedHor = 7.5;
 m_movementGroundAccelHor = 1;
-m_movementAirFallAccelHor = .75;
+m_movementAirFallAccelHor = .25;
 m_movementGroundFriction = .5;
-m_movementGroundMaxSpeed = 8.5;
-m_movementGroundJumpSpeed = 14;
-m_movementAirFastFallSpeed = global.TerminalVelocity * 1.3;
+m_movementGroundMaxSpeed = 6;
+m_movementGroundJumpSpeed = 13.5;
+m_movementAirFallMaxSpeedVert = 8;
+m_movementAirFastFallSpeed = m_movementAirFallMaxSpeedVert * 1.3;
+
 
 m_playerState = PlayerStates.None;
 m_analogStickUsed = false;
@@ -111,6 +114,7 @@ m_playerWallSlideJumpSpeed = 8.5;
 m_playerWallJumpLateralSpeedRatio = .7;
 m_playerWallLatchSpeedThresh = 4;
 m_playerWallSlideSpeedThresh = 1.5;
+m_playerWallDetonateSpeed = 14;
 
 //Audio
 //m_audioRun = Run_snd;
@@ -349,6 +353,51 @@ if(instance_exists(m_spear))
   
   var xAdjust = 0;
   var yAdjust = 0;
+  if(m_spearLungeAdjust != 0)
+  {
+    xAdjust = lengthdir_x(m_spearLungeAdjust, m_spear.image_angle);
+    yAdjust = lengthdir_y(m_spearLungeAdjust, m_spear.image_angle);
+  }
+  
+  m_spear.x = x + xAdjust;
+  m_spear.y = y + yAdjust;
+  m_spear.depth = depth - 1;
+  PlayerSpear_PositionSkeweredEnemies_scr(m_spear);
+  
+  if(InputManager_GetButtonControlState_scr(ButtonControls.Detonate) == ButtonStates.JustPressed)
+  {
+    if(m_spearCanDetonate &amp;&amp; instance_exists(PlayerSpear_Detonate_scr(m_spear)))
+    {
+      //Pull spear out of object
+      m_spear.m_imbedPointX = undefined;
+      m_spear.m_imbedPointY = undefined;  
+    
+      var angle = m_spear.image_angle + 180;
+      if(angle &gt;= 360) angle -= 360;
+      
+      var vertComponent = lengthdir_y(m_spearDetonationSpeed, angle);
+      if(sign(vertComponent) != sign(Movable_GetVSpeed_scr(id)))
+      {
+        Movable_ChangeVSpeed_scr(vertComponent, 1000);
+      }
+      else
+      {
+        Movable_AddMotion_scr(id, 270, vertComponent);
+      }
+      
+      var horComponent = lengthdir_x(m_spearDetonationSpeed, angle);
+      if(sign(horComponent) != sign(Movable_GetHSpeed_scr(id)))
+      {
+        Movable_ChangeHSpeed_scr(horComponent, 1000);
+      }
+      else
+      {
+        Movable_AddMotion_scr(id, 0, horComponent);
+      }
+      m_spearCanDetonate = false;      
+    }
+  }
+  
   var imbedCoords; 
   var angleBefore = m_spear.image_angle;
   if(!is_undefined(spearAngle) &amp;&amp; !m_spearIsLunging) 
@@ -374,26 +423,6 @@ if(instance_exists(m_spear))
     m_velocityH = 0;
     m_velocityV = 0;
   }
-  
-  if(m_spearLungeAdjust != 0)
-  {
-    xAdjust = lengthdir_x(m_spearLungeAdjust, m_spear.image_angle);
-    yAdjust = lengthdir_y(m_spearLungeAdjust, m_spear.image_angle);
-  }
-  
-  m_spear.x = x + xAdjust;
-  m_spear.y = y + yAdjust;
-  m_spear.depth = depth - 1;
-  PlayerSpear_PositionSkeweredEnemies_scr(m_spear);
-  
-  if(InputManager_GetButtonControlState_scr(ButtonControls.Detonate) == ButtonStates.JustPressed)
-  {
-    if(m_spearCanDetonate &amp;&amp; instance_exists(PlayerSpear_Detonate_scr(m_spear)))
-    {
-      Movable_AddMotion_scr(id, m_spear.image_angle + 180, 10);
-      m_spearCanDetonate = false;      
-    }
-  }
 }
 </string>
           </argument>
@@ -418,7 +447,16 @@ if(instance_exists(m_spear))
           <argument>
             <kind>1</kind>
             <string>///Charge Spear
-PlayerSpear_AddCharge_scr(m_spear, m_spearChargeAmount);
+
+if(PlayerSpear_IsImbedded_scr(m_spear))
+{
+  PlayerSpear_AddCharge_scr(m_spear, 10000, false);
+  m_spearCanDetonate = true;
+}
+else
+{
+  PlayerSpear_AddCharge_scr(m_spear, m_spearChargeAmount);
+}
 </string>
           </argument>
         </arguments>

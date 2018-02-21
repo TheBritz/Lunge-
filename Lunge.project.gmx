@@ -265,6 +265,7 @@
           <script>scripts\PlayerSpear_SkewerEnemy_scr.gml</script>
           <script>scripts\PlayerSpear_PositionSkeweredEnemies_scr.gml</script>
           <script>scripts\PlayerSpear_SetAngle_scr.gml</script>
+          <script>scripts\PlayerSpear_IsImbedded_scr.gml</script>
         </scripts>
       </scripts>
     </scripts>
@@ -328,6 +329,7 @@
     </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\room3</room>
     <room>rooms\room1</room>
     <room>rooms\room2</room>
     <room>rooms\room0</room>

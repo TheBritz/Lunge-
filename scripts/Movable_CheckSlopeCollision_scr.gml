@@ -14,13 +14,21 @@ var bottom = sprite_get_height(mask_index) *
 var xx = x;
 if(instance_exists(slope))
 {
-  if(slope.image_index > 0)
+  if(slope.image_xscale > 0)
   {
-    xx = bbox_left;
+    xx = bbox_right;
+    if(xx > slope.bbox_right)
+    {
+      xx = slope.bbox_right;
+    }
   }
   else
   {
-    xx = bbox_right;
+    xx = bbox_left;
+    if(xx < slope.bbox_left)
+    {
+      xx = slope.bbox_left;
+    }
   } 
 }
  

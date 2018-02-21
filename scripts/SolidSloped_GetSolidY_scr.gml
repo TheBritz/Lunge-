@@ -10,8 +10,8 @@ with(slopedSolid)
   var top = y - sprite_yoffset;
   var bottom = top + sprite_height;
   var sizeY = bottom - top;
-  var left = x - sprite_xoffset * facingMod;
-  var right = left + sprite_width * facingMod;
+  var left = bbox_left;
+  var right = bbox_right;
   if(left <= xx && xx <= right)
   {
     var sizeX = right - left;
