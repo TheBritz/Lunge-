@@ -94,7 +94,7 @@ m_movementAirFallAccelHor = .25;
 m_movementGroundFriction = .5;
 m_movementGroundMaxSpeed = 6;
 m_movementGroundJumpSpeed = 13.5;
-m_movementAirFallMaxSpeedVert = 8;
+m_movementAirFallMaxSpeedVert = 10;
 m_movementAirFastFallSpeed = m_movementAirFallMaxSpeedVert * 1.3;
 
 
@@ -107,7 +107,7 @@ m_playerMovementWallSlideGravity = .07;
 m_playerMovementWallSlideMaxSpeed = 5;
 m_playerMovementJumpGrav = global.Gravity * .7;
 m_playerMovementModifyGrav = false;
-m_movementJumpLag = room_speed/12;
+m_movementJumpLag = room_speed/10;
 m_playerMovementJumpShortSpeed = m_movementGroundJumpSpeed * .75; 
 m_playerWallLatchJumpSpeed = 10;
 m_playerWallSlideJumpSpeed = 8.5;

@@ -56,10 +56,10 @@ repeat (abs(roundedVelocityV))
   m_impactVelV = 0;
 }
 
-Movable_CheckSlopeCollision_scr();
-
 var flatYCollision = m_impactVelV > 0;
 var preCheckY = y;
+
+Movable_CheckSlopeCollision_scr();
 
 if(flatYCollision && y > preCheckY)
 {

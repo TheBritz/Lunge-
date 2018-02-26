@@ -34,14 +34,16 @@ m_charge = m_chargeToDetonate;
 m_chargeMax = m_chargeToDetonate;
 m_isLunging = false;
 m_strikeTime = 6;
-m_targetType = EnemyBase_obj;
+m_targetType = Enemy_obj;
 m_skeweredEnemies = ds_list_create();
 mask_index = HitboxPlayerSpear_spr;
+m_skewerHitbox = HitboxPlayerSpear_spr;
 m_skewerPosX = sprite_width - sprite_xoffset - 12;
 m_skewerPosY = 0;
 m_imbedPosX = sprite_width - sprite_xoffset - 3;
 m_imbedPointX = undefined;
 m_imbedPointY = undefined;
+m_imbedHitbox = HitboxPlayerSpearImbed_spr;
 </string>
           </argument>
         </arguments>
@@ -67,17 +69,13 @@ m_imbedPointY = undefined;
             <string>///Attack Collision
 if(PlayerSpear_CanStrike_scr(id))
 {
+  mask_index = m_skewerHitbox;
   var hitList = instance_place_list(x, y, m_targetType, 3);
   
   for(var i = 0; i &lt; ds_list_size(hitList) i++)
   {
     var hit = hitList[|i];
     PlayerSpear_SkewerEnemy_scr(id, hit);
-  }
-  
-  if(ds_list_size(hitList) &gt; 0)
-  {
-    var test = "test";
   }
 }
 </string>
@@ -104,6 +102,7 @@ if(PlayerSpear_CanStrike_scr(id))
 if(PlayerSpear_CanStrike_scr(id) &amp;&amp; instance_exists(m_wielder) &amp;&amp; 
    Combatant_GetState_scr(m_wielder) == CombatantStates.Air)
 {
+  mask_index = m_imbedHitbox;
   if(place_meeting(x, y, Solid_obj))
   {
     //Find the point of entry

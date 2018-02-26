@@ -48,10 +48,11 @@ else if(instance_exists(slope))
   var test = "test";
 }
 
-var solidCollision = instance_place(xx, y, Solid_obj);
+var solidCollision = instance_place(x, y, Solid_obj);
 if(instance_exists(solidCollision))
 {
   move_outside(solidCollision, 90, 5);
+  y = floor(y);
 }
 
 return solidY;

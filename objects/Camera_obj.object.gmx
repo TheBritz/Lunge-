@@ -25,7 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>///Camera Init
+m_cameraTarget = noone;
+m_targetType = -1;
+m_snapRate = room_speed/3;
+m_settleThreshold = 2;
+m_leadFacingViewMultiplier = 0;
+m_leadSpeedMultiplierHor = 30;
+</string>
           </argument>
         </arguments>
       </action>
@@ -70,8 +77,32 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_xview = Player1_obj.x - view_wview/2;
-view_yview = Player1_obj.y - view_hview/2;
+            <string>///Position Camera
+if(instance_exists(m_cameraTarget))
+{
+  var adjustX = Camera_GetTargetAdjustments_scr(m_cameraTarget);
+  var centerPointX = view_xview + view_wview/2 - adjustX;
+  var diffX = centerPointX - m_cameraTarget.x;
+  if(abs(diffX) &lt; m_settleThreshold)
+  {
+    view_xview = m_cameraTarget.x - view_wview/2 + adjustX;
+  }
+  else
+  {
+    view_xview += -diffX/m_snapRate;
+  }
+  
+  var centerPointY = view_yview + view_hview/2;
+  var diffY = centerPointY - m_cameraTarget.y;
+  if(abs(diffY) &lt; m_settleThreshold)
+  {
+    view_yview = m_cameraTarget.y - view_hview/2;
+  }
+  else
+  {
+    view_yview += -diffY/m_snapRate;;
+  }
+}
 </string>
           </argument>
         </arguments>

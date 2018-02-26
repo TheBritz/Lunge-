@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>m_testPointX = undefined;
+            <string>m_shift = 2;
+m_testPointX = undefined;
 m_testPointY = undefined;
 m_color = c_red;
 </string>

@@ -7,8 +7,8 @@ var ySolid = undefined;
 with(slopedSolid)
 {
   var facingMod = sign(image_xscale);
-  var top = y - sprite_yoffset;
-  var bottom = top + sprite_height;
+  var top = bbox_top;
+  var bottom = bbox_bottom;
   var sizeY = bottom - top;
   var left = bbox_left;
   var right = bbox_right;

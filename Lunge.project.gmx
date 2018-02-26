@@ -33,6 +33,7 @@
       <sprite>sprites\PlayerRunDirectionChange_spr</sprite>
       <sprite>sprites\PlayerSpear_spr</sprite>
       <sprite>sprites\PlayerSpearLunging_spr</sprite>
+      <sprite>sprites\HitboxPlayerSpearImbed_spr</sprite>
       <sprite>sprites\HitboxPlayerSpear_spr</sprite>
       <sprite>sprites\Detonation_spr</sprite>
     </sprites>
@@ -44,6 +45,10 @@
         <sprite>sprites\EnemyHollowLaunched_spr</sprite>
         <sprite>sprites\HitboxHollowMaskSlash_spr</sprite>
         <sprite>sprites\EnemyHollowGroundIdle_spr</sprite>
+      </sprites>
+      <sprites name="EnemyTestTarget">
+        <sprite>sprites\EnemyTestTarget_spr</sprite>
+        <sprite>sprites\EnemyTestTargetHit_spr</sprite>
       </sprites>
     </sprites>
     <sprites name="Masks">
@@ -174,6 +179,11 @@
             <script>scripts\SolidSloped_CollisionCheck_scr.gml</script>
           </scripts>
         </scripts>
+        <scripts name="Camera">
+          <scripts name="Private">
+            <script>scripts\Camera_GetTargetAdjustments_scr.gml</script>
+          </scripts>
+        </scripts>
       </scripts>
       <scripts name="Entities">
         <scripts name="Entity">
@@ -254,6 +264,9 @@
             <script>scripts\EnemyBase_PursueAntagonist_scr.gml</script>
           </scripts>
         </scripts>
+        <scripts name="Enemy">
+          <script>scripts\TestTarget_GettingHitEvent_scr.gml</script>
+        </scripts>
       </scripts>
       <scripts name="PlayerSpear">
         <scripts name="Public">
@@ -302,6 +315,7 @@
           <object>objects\EnemyBase_obj</object>
           <object>objects\EnemySkewered_obj</object>
           <object>objects\EnemyHollow_obj</object>
+          <object>objects\EnemyTestTarget_obj</object>
         </objects>
         <objects name="Player">
           <object>objects\PlayerBase_obj</object>

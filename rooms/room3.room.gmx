@@ -67,6 +67,11 @@
     <instance objName="Solid_obj" x="1584" y="1152" name="inst_CB11D8D8" locked="0" code="" scaleX="1" scaleY="12" colour="4294967295" rotation="0"/>
     <instance objName="GameController_obj" x="0" y="0" name="inst_00FD52A7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Player1_obj" x="528" y="1296" name="inst_8424B4E5" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="Hitbox_obj" x="576" y="0" name="inst_6CDF1ED7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="EnemyTestTarget_obj" x="1224" y="1392" name="inst_0078623B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="EnemyTestTarget_obj" x="624" y="1272" name="inst_69A3031D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="EnemyTestTarget_obj" x="552" y="1104" name="inst_A80D8D70" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="EnemyTestTarget_obj" x="576" y="1152" name="inst_51ABFB42" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
