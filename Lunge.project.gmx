@@ -71,6 +71,8 @@
       <sprite>sprites\WallBase_spr</sprite>
       <sprite>sprites\WallBaseBig_spr</sprite>
       <sprite>sprites\SolidSloped_spr</sprite>
+      <sprite>sprites\DoorTest_spr</sprite>
+      <sprite>sprites\TrainingTargetPlatform_spr</sprite>
     </sprites>
     <sprites name="Console">
       <sprite>sprites\console_spr</sprite>
@@ -243,6 +245,11 @@
             <script>scripts\PlayerBase_StateWallLatch_scr.gml</script>
             <script>scripts\PlayerBase_StateWallSlide_scr.gml</script>
           </scripts>
+          <scripts name="Public">
+            <script>scripts\PlayerBase_GetSpearHoldRelativePosition_scr.gml</script>
+            <script>scripts\PlayerBase_GetSpearHoldHeightAboveGround_scr.gml</script>
+            <script>scripts\PlayerBase_GetSpearThrustDistance_scr.gml</script>
+          </scripts>
         </scripts>
         <scripts name="Movable">
           <scripts name="Private">
@@ -332,6 +339,9 @@
         <object>objects\ElevatorShaft_obj</object>
         <object>objects\BloodLettingChamber_obj</object>
         <object>objects\ElevatorCar_obj</object>
+        <object>objects\DoorClosed_obj</object>
+        <object>objects\DoorOpen_obj</object>
+        <object>objects\TrainingTargetPlatform_obj</object>
       </objects>
     </objects>
     <objects name="Debug">
