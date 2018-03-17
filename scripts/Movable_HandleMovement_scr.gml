@@ -43,7 +43,20 @@ m_subV -= roundedVelocityV;
 if(roundedVelocityV = 0) m_impactVelV = 0;
 repeat (abs(roundedVelocityV))
 {
-  if (!place_meeting(x, y + sign(roundedVelocityV), Solid_obj))
+  var hitPlatform = false;
+  var velocitySign = sign(roundedVelocityV)
+  if(roundedVelocityV > 0)
+  {
+    var platform = instance_place(x, y + velocitySign, Platform_obj);
+    if(instance_exists(platform))
+    {
+      if(bbox_bottom <= platform.y)
+      {
+        hitPlatform = true;
+      }
+    }
+  }
+  if (!hitPlatform && !place_meeting(x, y + velocitySign, Solid_obj))
     y += sign(roundedVelocityV); 
   else 
   {

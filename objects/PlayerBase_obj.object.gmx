@@ -126,6 +126,16 @@ Entity_RegisterAnimationEvent_scr(id, PlayerRun_spr,
 Entity_RegisterAnimationEvent_scr(id, PlayerRun_spr, 
   5, PlayerBase_PlayRunStepSound_scr, id);  
   
+Entity_RegisterAnimationEvent_scr(id, PlayerRun_spr, 
+  1, PlayerBase_ThrowMovmentDust_scr, id);
+Entity_RegisterAnimationEvent_scr(id, PlayerRun_spr, 
+  3, PlayerBase_ThrowMovmentDust_scr, id);
+  Entity_RegisterAnimationEvent_scr(id, PlayerRun_spr, 
+  5, PlayerBase_ThrowMovmentDust_scr, id);
+Entity_RegisterAnimationEvent_scr(id, PlayerRun_spr, 
+  7, PlayerBase_ThrowMovmentDust_scr, id);  
+  
+  
 //Register hitboxes with 
 Entity_RegisterAnimationEvent_scr(id, PlayerAttackGroundDash_spr, 
   4, Combatant_AddHitboxAttack_scr, array(HitboxPlayerSlash_spr, 73, 0, 4));
