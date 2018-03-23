@@ -273,11 +273,31 @@
         </scripts>
         <scripts name="EnemyBase">
           <scripts name="Private">
-            <script>scripts\EnemyBase_PursueAntagonist_scr.gml</script>
+            <script>scripts\scripts/EnemyAIBase_BehaviorPursuingAntagonist_scr.gml</script>
+            <script>scripts\EnemyAIBase_BehaviorIdling_scr.gml</script>
+            <script>scripts\EnemyAIBase_BehaviorEngaging_scr.gml</script>
+            <script>scripts\EnemyAIBase_SupportingBehaviorLookForAntagonist_scr.gml</script>
+            <script>scripts\script149.gml</script>
+          </scripts>
+          <scripts name="Public">
+            <script>scripts\EnemyAIBase_GetCurrentStateFrames_scr.gml</script>
+            <script>scripts\EnemyAIBase_SetBehaviorExtensionScript_scr.gml</script>
+            <script>scripts\EnemyAIBase_GetExtensionScript_scr.gml</script>
           </scripts>
         </scripts>
         <scripts name="Enemy">
           <script>scripts\TestTarget_GettingHitEvent_scr.gml</script>
+          <scripts name="AI Behaviors">
+            <script>scripts\EnemyAI_BehaviorTemplate_scr.gml</script>
+          </scripts>
+          <scripts name="AI Triggers">
+            <script>scripts\EnemyAI_AddTrigger_scr.gml</script>
+          </scripts>
+          <scripts name="EnemyBasher">
+            <script>scripts\EnemyBasher_BehaviorEngaging_scr.gml</script>
+            <script>scripts\EnemyBasher_BehaviorLungeAttack_scr.gml</script>
+            <script>scripts\EnemyBasher_BehaviorJumpAttack_scr.gml</script>
+          </scripts>
         </scripts>
       </scripts>
       <scripts name="PlayerSpear">
@@ -307,6 +327,7 @@
       <script>scripts\GamepadGetDirectionFromStickAxes_scr.gml</script>
       <script>scripts\relative_coordinates.gml</script>
       <script>scripts\ExecuteScriptArgArray_scr.gml</script>
+      <script>scripts\choose_weighted.gml</script>
     </scripts>
     <script>scripts\script120.gml</script>
   </scripts>
@@ -330,9 +351,10 @@
         <object>objects\Friendly_obj</object>
         <object>objects\Enemy_obj</object>
         <objects name="Enemies">
-          <object>objects\EnemyBase_obj</object>
+          <object>objects\EnemyAIBase_obj</object>
+          <object>objects\EnemyBas</object>
           <object>objects\EnemySkewered_obj</object>
-          <object>objects\EnemyHollow_obj</object>
+          <object>objects\EnemyBasher_obj</object>
           <object>objects\EnemyTestTarget_obj</object>
         </objects>
         <objects name="Player">
