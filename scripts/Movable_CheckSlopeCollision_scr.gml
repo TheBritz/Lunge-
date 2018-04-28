@@ -7,6 +7,10 @@ if(m_slopeStickFactor > 0 &&
    sign(m_velocityH) != sign(slope.image_xscale))
 {
   slopeStickAdjust = m_slopeStickFactor * abs(m_velocityH);
+  if(object_index == Player1_obj)
+  {
+    var test = "test";
+  }
 }
 
 var bottom = sprite_get_height(mask_index) * 
@@ -31,7 +35,7 @@ if(instance_exists(slope))
     }
   } 
 }
- 
+
 var solidY = SolidSloped_CollisionCheck_scr(xx, y + slopeStickAdjust, bottom);
 if(!is_undefined(solidY))
 {

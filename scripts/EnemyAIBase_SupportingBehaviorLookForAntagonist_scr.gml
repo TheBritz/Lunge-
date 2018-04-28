@@ -15,6 +15,7 @@ with(m_aiAntagonistType)
       //Antagnoist in sight
       other.m_aiTarget = id;
       other.m_aiState = EnemyAIStates.PursuingAntagonist;
+      break;
     } 
   }  
 }

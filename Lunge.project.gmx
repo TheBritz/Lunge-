@@ -50,6 +50,10 @@
         <sprite>sprites\EnemyTestTarget_spr</sprite>
         <sprite>sprites\EnemyTestTargetHit_spr</sprite>
       </sprites>
+      <sprites name="Enforcer">
+        <sprite>sprites\EnforcerBasicIdle_spr</sprite>
+        <sprite>sprites\EnforcerBasicRun_spr</sprite>
+      </sprites>
     </sprites>
     <sprites name="Masks">
       <sprite>sprites\HitboxFloorCheck_spr</sprite>
@@ -273,11 +277,10 @@
         </scripts>
         <scripts name="EnemyBase">
           <scripts name="Private">
-            <script>scripts\scripts/EnemyAIBase_BehaviorPursuingAntagonist_scr.gml</script>
             <script>scripts\EnemyAIBase_BehaviorIdling_scr.gml</script>
             <script>scripts\EnemyAIBase_BehaviorEngaging_scr.gml</script>
             <script>scripts\EnemyAIBase_SupportingBehaviorLookForAntagonist_scr.gml</script>
-            <script>scripts\script149.gml</script>
+            <script>scripts\EnemyAIBase_BehaviorPursuing_scr.gml</script>
           </scripts>
           <scripts name="Public">
             <script>scripts\EnemyAIBase_GetCurrentStateFrames_scr.gml</script>
@@ -328,6 +331,7 @@
       <script>scripts\relative_coordinates.gml</script>
       <script>scripts\ExecuteScriptArgArray_scr.gml</script>
       <script>scripts\choose_weighted.gml</script>
+      <script>scripts\is_within_range.gml</script>
     </scripts>
     <script>scripts\script120.gml</script>
   </scripts>
@@ -354,7 +358,7 @@
           <object>objects\EnemyAIBase_obj</object>
           <object>objects\EnemyBas</object>
           <object>objects\EnemySkewered_obj</object>
-          <object>objects\EnemyBasher_obj</object>
+          <object>objects\EnemyEnforcer_obj</object>
           <object>objects\EnemyTestTarget_obj</object>
         </objects>
         <objects name="Player">
